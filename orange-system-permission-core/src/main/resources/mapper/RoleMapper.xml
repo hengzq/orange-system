@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.hengzq.orange.system.permission.core.mapper.RoleMapper">
+
+
+    <resultMap id="roleResultMap" type="cn.hengzq.orange.system.permission.core.entity.RoleEntity">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="permission" column="permission"/>
+        <result property="sort" column="sort"/>
+        <result property="enabled" column="enabled"/>
+        <result property="preset" column="preset"/>
+        <result property="remark" column="remark"/>
+        <result property="createdBy" column="created_by"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedBy" column="updated_by"/>
+        <result property="updatedAt" column="updated_at"/>
+    </resultMap>
+
+
+    <select id="selectListByUserId" parameterType="long" resultMap="roleResultMap">
+        select distinct r.id,
+                        r.tenant_id,
+                        r.name,
+                        r.permission,
+                        r.sort,
+                        r.enabled,
+                        r.preset,
+                        r.remark,
+                        r.created_by,
+                        r.created_at,
+                        r.updated_by,
+                        r.updated_at
+        from sys_role r
+                 left join sys_user_role_rl ur on r.id = ur.role_id
+        where ur.user_id = #{userId}
+    </select>
+</mapper>
