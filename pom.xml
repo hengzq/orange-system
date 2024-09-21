@@ -28,7 +28,8 @@
         <module>orange-system-permission-core</module>
         <module>orange-system-dict-common</module>
         <module>orange-system-dict-core</module>
-
+        <module>orange-system-log-common</module>
+        <module>orange-system-log-core</module>
         <module>orange-system-service</module>
     </modules>
 
@@ -57,6 +58,16 @@
             <dependency>
                 <groupId>cn.hengzq.orange</groupId>
                 <artifactId>orange-system-dict-core</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hengzq.orange</groupId>
+                <artifactId>orange-system-log-common</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hengzq.orange</groupId>
+                <artifactId>orange-system-log-core</artifactId>
                 <version>${revision}</version>
             </dependency>
         </dependencies>

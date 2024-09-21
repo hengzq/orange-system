@@ -6,7 +6,7 @@ import cn.hengzq.orange.common.exception.ServiceException;
 import cn.hengzq.orange.common.util.Assert;
 import cn.hengzq.orange.common.util.CollUtils;
 import cn.hengzq.orange.mybatis.query.CommonWrappers;
-import cn.hengzq.orange.system.permission.core.convert.MenuConverter;
+import cn.hengzq.orange.system.permission.core.converter.MenuConverter;
 import cn.hengzq.orange.system.permission.core.entity.MenuEntity;
 import cn.hengzq.orange.system.permission.core.entity.RoleResourceRlEntity;
 import cn.hengzq.orange.system.permission.core.mapper.MenuMapper;

@@ -5,7 +5,7 @@ import cn.hengzq.orange.common.constant.GlobalErrorCodeConstant;
 import cn.hengzq.orange.common.util.Assert;
 import cn.hengzq.orange.common.util.CollUtils;
 import cn.hengzq.orange.mybatis.query.CommonWrappers;
-import cn.hengzq.orange.system.permission.core.convert.DepartmentConverter;
+import cn.hengzq.orange.system.permission.core.converter.DepartmentConverter;
 import cn.hengzq.orange.system.permission.core.entity.DepartmentEntity;
 import cn.hengzq.orange.system.permission.core.mapper.DepartmentMapper;
 import cn.hengzq.orange.system.permission.core.service.DepartmentService;

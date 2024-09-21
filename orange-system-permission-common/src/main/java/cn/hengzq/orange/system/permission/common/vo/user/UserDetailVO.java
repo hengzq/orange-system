@@ -1,5 +1,6 @@
 package cn.hengzq.orange.system.permission.common.vo.user;
 
+import cn.hengzq.orange.system.permission.common.vo.button.ButtonVO;
 import cn.hengzq.orange.system.permission.common.vo.role.RoleVO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
@@ -22,5 +23,6 @@ public class UserDetailVO extends UserVO {
 
     @Schema(description = "用户拥有角色")
     private List<RoleVO> roles;
+
 
 }

@@ -5,7 +5,7 @@ import cn.hengzq.orange.common.dto.LoginUserInfo;
 import cn.hengzq.orange.common.exception.ServiceException;
 import cn.hengzq.orange.common.util.JwtToken;
 import cn.hengzq.orange.context.GlobalContextHelper;
-import cn.hengzq.orange.system.permission.core.convert.UserConverter;
+import cn.hengzq.orange.system.permission.core.converter.UserConverter;
 import cn.hengzq.orange.system.permission.core.service.AuthService;
 import cn.hengzq.orange.system.permission.core.service.UserService;
 import cn.hengzq.orange.system.permission.common.vo.auth.TokenVO;

@@ -2,6 +2,7 @@ package cn.hengzq.orange.system.permission.core.controller;
 
 import cn.hengzq.orange.common.result.Result;
 import cn.hengzq.orange.common.result.ResultWrapper;
+import cn.hengzq.orange.system.permission.common.vo.permission.AuthUserInfoVO;
 import cn.hengzq.orange.system.permission.core.service.PermissionService;
 import cn.hengzq.orange.system.permission.common.constant.PermissionConstant;
 import cn.hengzq.orange.system.permission.common.vo.permission.RouterVO;
@@ -35,12 +36,13 @@ public class PermissionController {
         return ResultWrapper.ok(permissionService.assignResourcesToOneRole(param));
     }
 
-
-    @Operation(summary = "查询当前用户路由", operationId = "system-permission:permission:list-user-routers", description = "只返回当前登录用户拥有的路由")
-    @GetMapping("/list-user-routers")
-    public Result<List<RouterVO>> listUserRouters() {
-        return ResultWrapper.ok(permissionService.listUserRouters());
+    @Operation(summary = "获取登陆用户信息", operationId = "system-permission:permission:user-info")
+    @GetMapping("/user-info")
+    public Result<AuthUserInfoVO> getUserInfo() {
+        return ResultWrapper.ok(permissionService.getUserInfo());
     }
+
+
 //    @Operation(summary = "给多个用户分配多个角色", operationId = "system:permission:permission:assign-roles-to-users")
 //    @PostMapping("/assign-roles-to-users")
 //    public Result<Boolean> allotUserRole(@RequestBody @Validated AllotUserRoleRequest request) {

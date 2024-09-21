@@ -36,20 +36,12 @@ public class AuthController {
         return ResultWrapper.ok(tokenVo);
     }
 
-
     @Operation(summary = "账号退出登录", operationId = "system:permission:auth:logout")
     @GetMapping(value = "/logout")
     public Result<Void> logout() {
         return ResultWrapper.ok();
     }
 
-    @Operation(summary = "获取登陆用户信息", operationId = "system-permission:auth:user-info")
-    @GetMapping("/user-info")
-    public Result<UserDetailVO> getUserInfo() {
-        UserDetailQueryParam param = new UserDetailQueryParam();
-        param.setShowRole(true);
-        return ResultWrapper.ok(userService.getById(GlobalContextHelper.getUserId(), param));
-    }
 
     @Operation(summary = "密码加密 只用于API测试使用", operationId = "system:permission:auth:password-encrypt")
     @GetMapping("/password-encrypt")

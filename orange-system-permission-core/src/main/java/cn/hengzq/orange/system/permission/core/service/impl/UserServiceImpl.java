@@ -8,9 +8,10 @@ import cn.hengzq.orange.common.util.Assert;
 import cn.hengzq.orange.context.GlobalContextHelper;
 import cn.hengzq.orange.mybatis.query.CommonWrappers;
 import cn.hengzq.orange.system.permission.common.exception.UserErrorCode;
-import cn.hengzq.orange.system.permission.core.convert.UserConverter;
+import cn.hengzq.orange.system.permission.core.converter.UserConverter;
 import cn.hengzq.orange.system.permission.core.entity.UserEntity;
 import cn.hengzq.orange.system.permission.core.mapper.UserMapper;
+import cn.hengzq.orange.system.permission.core.service.ButtonService;
 import cn.hengzq.orange.system.permission.core.service.RoleService;
 import cn.hengzq.orange.system.permission.core.service.UserDepartmentRlService;
 import cn.hengzq.orange.system.permission.core.service.UserService;
@@ -45,6 +46,7 @@ public class UserServiceImpl implements UserService {
 
     private final RoleService roleService;
 
+    private final ButtonService buttonService;
 
     @Override
     @Transactional

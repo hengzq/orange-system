@@ -5,7 +5,7 @@ import cn.hengzq.orange.common.dto.PageDTO;
 import cn.hengzq.orange.common.util.Assert;
 import cn.hengzq.orange.common.util.CollUtils;
 import cn.hengzq.orange.mybatis.query.CommonWrappers;
-import cn.hengzq.orange.system.permission.core.convert.ButtonConverter;
+import cn.hengzq.orange.system.permission.core.converter.ButtonConverter;
 import cn.hengzq.orange.system.permission.core.entity.ButtonEntity;
 import cn.hengzq.orange.system.permission.core.entity.RoleResourceRlEntity;
 import cn.hengzq.orange.system.permission.core.mapper.ButtonMapper;

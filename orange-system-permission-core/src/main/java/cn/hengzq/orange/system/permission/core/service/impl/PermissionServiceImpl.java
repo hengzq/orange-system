@@ -1,24 +1,31 @@
 package cn.hengzq.orange.system.permission.core.service.impl;
 
+import cn.hengzq.orange.common.constant.GlobalConstant;
+import cn.hengzq.orange.common.constant.GlobalErrorCodeConstant;
+import cn.hengzq.orange.common.util.Assert;
 import cn.hengzq.orange.common.util.CollUtils;
 import cn.hengzq.orange.context.GlobalContextHelper;
-import cn.hengzq.orange.system.permission.core.convert.PermissionConverter;
-import cn.hengzq.orange.system.permission.core.entity.RoleEntity;
+import cn.hengzq.orange.system.permission.common.vo.button.ButtonVO;
+import cn.hengzq.orange.system.permission.common.vo.button.param.ButtonListParam;
+import cn.hengzq.orange.system.permission.common.vo.permission.AuthUserInfoVO;
+import cn.hengzq.orange.system.permission.common.vo.role.RoleVO;
+import cn.hengzq.orange.system.permission.core.converter.PermissionConverter;
 import cn.hengzq.orange.system.permission.core.entity.RoleResourceRlEntity;
 import cn.hengzq.orange.system.permission.core.entity.UserEntity;
 import cn.hengzq.orange.system.permission.core.entity.UserRoleRlEntity;
-import cn.hengzq.orange.system.permission.core.mapper.RoleMapper;
 import cn.hengzq.orange.system.permission.core.mapper.RoleResourceRlMapper;
 import cn.hengzq.orange.system.permission.core.mapper.UserMapper;
 import cn.hengzq.orange.system.permission.core.mapper.UserRoleRlMapper;
+import cn.hengzq.orange.system.permission.core.service.ButtonService;
 import cn.hengzq.orange.system.permission.core.service.MenuService;
 import cn.hengzq.orange.system.permission.core.service.PermissionService;
 import cn.hengzq.orange.system.permission.common.enums.ResourceTypeEnum;
 import cn.hengzq.orange.system.permission.common.vo.menu.MenuDetailVO;
 import cn.hengzq.orange.system.permission.common.vo.menu.param.MenuListParam;
-import cn.hengzq.orange.system.permission.common.vo.permission.RouterVO;
 import cn.hengzq.orange.system.permission.common.vo.role.param.AssignResourcesToOneRoleParam;
 import cn.hengzq.orange.system.permission.common.vo.user.param.AssignRolesToOneUserParam;
+import cn.hengzq.orange.system.permission.core.service.RoleService;
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +34,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -40,9 +46,11 @@ public class PermissionServiceImpl implements PermissionService {
 
     private final UserMapper userMapper;
 
-    private final RoleMapper roleMapper;
+    private final RoleService roleService;
 
     private final MenuService menuService;
+
+    private final ButtonService buttonService;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -84,31 +92,48 @@ public class PermissionServiceImpl implements PermissionService {
     }
 
     @Override
-    public List<RouterVO> listUserRouters() {
+    public AuthUserInfoVO getUserInfo() {
         Long userId = GlobalContextHelper.getUserId();
-        UserEntity user = userMapper.selectById(userId);
-        if (Objects.isNull(user)) {
-            log.info("user is null.userId:{}", userId);
-            return List.of();
+        UserEntity entity = userMapper.selectById(userId);
+        AuthUserInfoVO authUserInfoVO = BeanUtil.copyProperties(entity, AuthUserInfoVO.class);
+        Assert.nonNull(authUserInfoVO, GlobalErrorCodeConstant.GLOBAL_PARAMETER_ID_IS_INVALID);
+
+        // 封装角色
+        List<RoleVO> roleVOS = roleService.listByUserId(userId);
+        List<String> rolePerms = CollUtils.convertList(roleVOS, RoleVO::getPermission);
+        if (CollUtil.isEmpty(rolePerms)) {
+            return authUserInfoVO;
         }
-        List<RoleEntity> roleEntityList = roleMapper.selectListByUserId(userId);
-        if (CollUtil.isEmpty(roleEntityList)) {
-            return List.of();
-        }
-        List<String> permissions = CollUtils.convertList(roleEntityList, RoleEntity::getPermission);
-        List<Long> roleIds = CollUtils.convertList(roleEntityList, RoleEntity::getId);
+        authUserInfoVO.setRolePermissions(rolePerms);
+
+        // 封装菜单
+        List<Long> roleIds = CollUtils.convertList(roleVOS, RoleVO::getId);
+
         List<MenuDetailVO> menuVOList;
         // admin 拥有所有的权限
-        if (permissions.contains("admin")) {
+        if (rolePerms.contains(GlobalConstant.SUPER_ADMIN_ROLE)) {
             menuVOList = menuService.list(MenuListParam.builder().build());
         } else {
             menuVOList = menuService.list(MenuListParam.builder().roleIds(roleIds).build());
         }
         if (CollUtil.isEmpty(menuVOList)) {
-            return List.of();
+            return authUserInfoVO;
         }
-        return menuVOList.stream().filter(item -> Objects.nonNull(item.getHidden()) && !item.getHidden())
-                .map(PermissionConverter.INSTANCE::toRouter)
-                .sorted(Comparator.comparing(RouterVO::getSort)).collect(Collectors.toList());
+        List<AuthUserInfoVO.Menu> menus = menuVOList.stream().filter(item -> Objects.nonNull(item.getHidden()) && !item.getHidden())
+                .map(PermissionConverter.INSTANCE::toMenu)
+                .sorted(Comparator.comparing(AuthUserInfoVO.Menu::getSort)).toList();
+        authUserInfoVO.setMenus(menus);
+        authUserInfoVO.setMenuPermissions(CollUtils.convertList(menuVOList, MenuDetailVO::getPermission));
+
+        // 封装按钮
+        List<Long> menuIds = CollUtils.convertList(menuVOList, MenuDetailVO::getId);
+        List<ButtonVO> buttonVOS;
+        if (rolePerms.contains(GlobalConstant.SUPER_ADMIN_ROLE)) {
+            buttonVOS = buttonService.list(ButtonListParam.builder().menuIds(menuIds).build());
+        } else {
+            buttonVOS = buttonService.list(ButtonListParam.builder().roleIds(roleIds).build());
+        }
+        authUserInfoVO.setButtonPermissions(CollUtils.convertList(buttonVOS, ButtonVO::getPermission));
+        return authUserInfoVO;
     }
 }
