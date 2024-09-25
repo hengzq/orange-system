@@ -24,12 +24,9 @@
 
     <modules>
         <module>orange-system-common</module>
-        <module>orange-system-permission-common</module>
-        <module>orange-system-permission-core</module>
-        <module>orange-system-dict-common</module>
-        <module>orange-system-dict-core</module>
-        <module>orange-system-log-common</module>
-        <module>orange-system-log-core</module>
+        <module>orange-system-api</module>
+        <module>orange-system-biz-starters</module>
+        <module>orange-system-core</module>
         <module>orange-system-service</module>
     </modules>
 
@@ -42,32 +39,17 @@
             </dependency>
             <dependency>
                 <groupId>cn.hengzq.orange</groupId>
-                <artifactId>orange-system-permission-common</artifactId>
+                <artifactId>orange-system-api</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>cn.hengzq.orange</groupId>
-                <artifactId>orange-system-permission-core</artifactId>
+                <artifactId>orange-system-log-biz-starter</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>cn.hengzq.orange</groupId>
-                <artifactId>orange-system-dict-common</artifactId>
-                <version>${revision}</version>
-            </dependency>
-            <dependency>
-                <groupId>cn.hengzq.orange</groupId>
-                <artifactId>orange-system-dict-core</artifactId>
-                <version>${revision}</version>
-            </dependency>
-            <dependency>
-                <groupId>cn.hengzq.orange</groupId>
-                <artifactId>orange-system-log-common</artifactId>
-                <version>${revision}</version>
-            </dependency>
-            <dependency>
-                <groupId>cn.hengzq.orange</groupId>
-                <artifactId>orange-system-log-core</artifactId>
+                <artifactId>orange-system-core</artifactId>
                 <version>${revision}</version>
             </dependency>
         </dependencies>

@@ -1,0 +1,3 @@
+cn.hengzq.orange.system.log.starter.config.LogBaseAutoConfiguration
+cn.hengzq.orange.system.log.starter.config.LogCloudAutoConfiguration
+cn.hengzq.orange.system.log.starter.config.LogMonomerAutoConfiguration
