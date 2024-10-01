@@ -50,4 +50,6 @@ public interface UserService {
     List<UserVO> list(UserListParam query);
 
     Map<Long, String> getNameMapByIds(Set<Long> ids);
+
+    Boolean removeById(Long id);
 }

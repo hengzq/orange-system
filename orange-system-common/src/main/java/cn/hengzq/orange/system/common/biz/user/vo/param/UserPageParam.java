@@ -17,6 +17,9 @@ public class UserPageParam extends PageParam {
     private String name;
 
     @Schema(description = "用户名称 模糊查询")
-    private String nicknameLike;
+    private String nameLike;
+
+    @Schema(description = "登陆账号 模糊查询")
+    private String loginAccountLike;
 
 }

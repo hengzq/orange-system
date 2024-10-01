@@ -26,7 +26,7 @@ where id = @d_id;
 INSERT INTO sys_department (id, tenant_id, name, parent_id, sort, created_by, created_at, updated_by, updated_at)
 VALUES (@d_id, @t_id, '全公司', -1, 0, @u_id, NOW(), @u_id, NOW());
 -- ----------------------------
--- 用户信息表 清除所有的预置数据 用户默认密码 orange
+-- 用户信息表 清除所有的预置数据 用户默认密码 hengzq.cn
 -- ----------------------------
 delete
 from sys_user
@@ -34,7 +34,7 @@ where id = @u_id;
 
 INSERT INTO sys_user (id, tenant_id, nickname, email, gender, phone, username, password, created_by)
 VALUES (@u_id, @t_id, '系统管理员', 'hengzq@yeah.net', '1', '17629990001', 'admin',
-        '$2a$10$.pPlcDi1qZfD6RXRzGagdeuamQXIGRFuG83bKf9MEYiUxEwnvHj4S', @u_id);
+        '$2a$18$6Ora//VZ//HxnI64lNWYXOZx4Qp47M9.vQG72jx7u4BwGGdQquLaG', @u_id);
 
 -- ----------------------------
 -- 角色预置信息

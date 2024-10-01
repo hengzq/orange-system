@@ -41,11 +41,7 @@ public class DictDataServiceImpl implements DictDataService {
 
     @Override
     public Boolean removeById(Long id) {
-        DictDataEntity entity = dictDataMapper.selectById(id);
-        if (Objects.isNull(entity)) {
-            return true;
-        }
-        return dictDataMapper.deleteById(id) > 0;
+        return dictDataMapper.deleteOneById(id)  ;
     }
 
     @Override

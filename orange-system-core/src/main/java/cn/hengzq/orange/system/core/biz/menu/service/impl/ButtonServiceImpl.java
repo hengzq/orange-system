@@ -87,11 +87,7 @@ public class ButtonServiceImpl implements ButtonService {
 
     @Override
     public Boolean removeById(Long id) {
-        ButtonEntity entity = buttonMapper.selectById(id);
-        if (Objects.isNull(entity)) {
-            return true;
-        }
-        return buttonMapper.deleteById(entity) > 0;
+        return buttonMapper.deleteOneById(id);
     }
 
     @Override

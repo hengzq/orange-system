@@ -21,19 +21,19 @@ public class PermissionController {
 
     private final PermissionService permissionService;
 
-    @Operation(summary = "给一个用户分配多个角色", operationId = "system-permission:permission:assign-roles-to-one-user", description = "先删除该用户所有的已绑定角色，然后绑定新的角色")
+    @Operation(summary = "给一个用户分配多个角色", operationId = "system:permission:assign-roles-to-one-user", description = "先删除该用户所有的已绑定角色，然后绑定新的角色")
     @PostMapping("/assign-roles-to-one-user")
     public Result<Boolean> assignRolesToOneUser(@RequestBody @Validated AssignRolesToOneUserParam param) {
         return ResultWrapper.ok(permissionService.assignRolesToOneUser(param));
     }
 
-    @Operation(summary = "给指定角色赋予资源", operationId = "system-permission:permission:assign-resources-to-one-role", description = "先删除掉已绑定的资源,从新绑定.")
+    @Operation(summary = "给指定角色赋予资源", operationId = "system:permission:assign-resources-to-one-role", description = "先删除掉已绑定的资源,从新绑定.")
     @PostMapping("/assign-resources-to-one-role")
     public Result<Boolean> assignResourcesToOneRole(@RequestBody @Validated AssignResourcesToOneRoleParam param) {
         return ResultWrapper.ok(permissionService.assignResourcesToOneRole(param));
     }
 
-    @Operation(summary = "获取登陆用户信息", operationId = "system-permission:permission:user-info")
+    @Operation(summary = "获取登陆用户信息", operationId = "system:permission:user-info")
     @GetMapping("/user-info")
     public Result<AuthUserInfoVO> getUserInfo() {
         return ResultWrapper.ok(permissionService.getUserInfo());

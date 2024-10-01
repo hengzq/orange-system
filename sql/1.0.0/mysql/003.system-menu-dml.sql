@@ -46,7 +46,7 @@ values (200, @t_id, 2, '新增', 'system:department:add', 1, 1, @u_id),
 
 -- 用户管理
 INSERT INTO sys_menu (id, tenant_id, parent_id, name, permission, preset, path, icon, hidden, sort, created_by)
-VALUES (3, @t_id, 1, '用户管理', 'system:user:page', 0, 'system/user', 'system-person-circle', 0,
+VALUES (3, @t_id, 1, '用户管理', 'system:user:view', 0, 'system/user', 'system-person-circle', 0,
         30, @u_id);
 
 insert into sys_button (id, tenant_id, menu_id, name, permission, preset, sort, created_by)
@@ -54,7 +54,8 @@ values (300, @t_id, 3, '新增', 'system:user:add', 0, 1, @u_id),
        (310, @t_id, 3, '删除', 'system:user:delete', 0, 10, @u_id),
        (320, @t_id, 3, '修改', 'system:user:update', 0, 20, @u_id),
        (321, @t_id, 3, '修改密码', 'system:user:update-password', 0, 21, @u_id),
-       (322, @t_id, 3, '重置密码', 'system:user:reset-password', 0, 22, @u_id)
+       (322, @t_id, 3, '重置密码', 'system:user:reset-password', 0, 22, @u_id),
+       (323, @t_id, 3, '分配角色', 'system:permission:assign-roles-to-one-user', 0, 23, @u_id)
 ;
 
 -- 菜单管理
@@ -65,7 +66,10 @@ VALUES (4, @t_id, 1, '菜单管理', 'system:menu:view', 0, 'system/menu', 'syst
 insert into sys_button (id, tenant_id, menu_id, name, permission, preset, sort, created_by)
 values (400, @t_id, 4, '新增', 'system:menu:add', 1, 1, @u_id),
        (410, @t_id, 4, '删除', 'system:menu:delete', 1, 10, @u_id),
-       (420, @t_id, 4, '修改', 'system:menu:update', 1, 20, @u_id)
+       (420, @t_id, 4, '修改', 'system:menu:update', 1, 20, @u_id),
+       (430, @t_id, 4, '按钮-新增', 'system:button:add', 1, 30, @u_id),
+       (440, @t_id, 4, '按钮-删除', 'system:button:delete', 1, 40, @u_id),
+       (450, @t_id, 4, '按钮-修改', 'system:button:update', 1, 50, @u_id)
 ;
 
 -- 角色管理
@@ -76,7 +80,8 @@ VALUES (5, @t_id, 1, '角色管理', 'system:role:view', 0, 'system/role', 'syst
 insert into sys_button (id, tenant_id, menu_id, name, permission, preset, sort, created_by)
 values (500, @t_id, 5, '新增', 'system:role:add', 1, 1, @u_id),
        (510, @t_id, 5, '删除', 'system:role:delete', 1, 10, @u_id),
-       (520, @t_id, 5, '修改', 'system:role:update', 1, 20, @u_id)
+       (520, @t_id, 5, '修改', 'system:role:update', 1, 20, @u_id),
+       (521, @t_id, 5, '分配菜单', 'system:permission:assign-resources-to-one-role', 1, 21, @u_id)
 ;
 
 -- ----------------------------

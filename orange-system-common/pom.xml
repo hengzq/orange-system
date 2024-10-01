@@ -21,7 +21,6 @@
         <dependency>
             <groupId>cn.hengzq.orange</groupId>
             <artifactId>orange-starter-common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

@@ -38,13 +38,19 @@ public class UserController {
     @Operation(summary = "根据ID删除", operationId = "system:user:delete")
     @DeleteMapping("/{id}")
     public Result<Boolean> removeById(@PathVariable("id") Long id) {
-        return ResultWrapper.ok(true);
+        return ResultWrapper.ok(userService.removeById(id));
     }
 
     @Operation(summary = "根据ID更新", operationId = "system:user:update")
     @PutMapping("/{id}")
     public Result<Boolean> updateById(@PathVariable("id") Long id, @RequestBody @Validated UpdateUserParam param) {
         return ResultWrapper.ok(userService.updateById(id, param));
+    }
+
+    @Operation(summary = "重置密码", operationId = "system:user:update")
+    @PutMapping("/reset-password")
+    public Result<Boolean> resetPassword(@RequestBody @Validated ResetPasswordParam param) {
+        return ResultWrapper.ok(userService.resetPassword(param));
     }
 
     @Operation(summary = "根据ID查询", operationId = "system:user:get")

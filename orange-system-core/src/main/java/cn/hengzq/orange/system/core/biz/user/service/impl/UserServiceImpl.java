@@ -52,9 +52,10 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public Long add(AddUserParam param) {
         UserEntity entity = UserConverter.INSTANCE.toEntity(param);
-        // 密码加密
-        String password = StrUtil.isBlank(param.getLoginPassword()) ? SecurityConstant.DEFAULT_USER_PASSWORD : param.getLoginPassword();
-        entity.setLoginPassword(passwordEncoder.encode(password));
+        if (StrUtil.isNotBlank(param.getLoginAccount())) {
+            String password = StrUtil.isBlank(param.getLoginPassword()) ? SecurityConstant.DEFAULT_USER_PASSWORD : param.getLoginPassword();
+            entity.setLoginPassword(passwordEncoder.encode(password));
+        }
         Long userId = userMapper.insertOne(entity);
         if (CollUtil.isNotEmpty(param.getDepartmentIds())) {
             userDepartmentRlService.addUserDepartmentRelation(userId, param.getDepartmentIds());
@@ -116,7 +117,8 @@ public class UserServiceImpl implements UserService {
         PageDTO<UserEntity> page = userMapper.selectPage(query,
                 CommonWrappers.<UserEntity>lambdaQuery()
                         .eqIfPresent(UserEntity::getName, query.getName())
-                        .likeIfPresent(UserEntity::getName, query.getNicknameLike())
+                        .likeIfPresent(UserEntity::getName, query.getNameLike())
+                        .likeIfPresent(UserEntity::getLoginAccount, query.getLoginAccountLike())
         );
         return UserConverter.INSTANCE.toPage(page);
     }
@@ -142,6 +144,11 @@ public class UserServiceImpl implements UserService {
             return Map.of();
         }
         return CollUtils.convertMap(entityList, UserEntity::getId, UserEntity::getName);
+    }
+
+    @Override
+    public Boolean removeById(Long id) {
+        return userMapper.deleteOneById(id);
     }
 
 

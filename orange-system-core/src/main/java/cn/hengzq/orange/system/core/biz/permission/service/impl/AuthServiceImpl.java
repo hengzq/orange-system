@@ -10,6 +10,7 @@ import cn.hengzq.orange.system.common.biz.permission.vo.param.LoginParam;
 import cn.hengzq.orange.system.core.biz.permission.service.AuthService;
 import cn.hengzq.orange.system.core.biz.user.converter.UserConverter;
 import cn.hengzq.orange.system.core.biz.user.mapper.UserMapper;
+import cn.hengzq.orange.system.permission.core.entity.UserEntity;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.asymmetric.KeyType;
 import cn.hutool.crypto.asymmetric.RSA;
@@ -17,7 +18,6 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import cn.hengzq.orange.system.permission.core.entity.UserEntity;
 
 /**
  * @author hengzq
@@ -57,7 +57,6 @@ public class AuthServiceImpl implements AuthService {
         GlobalContextHelper.setContext(userInfo);
         return new TokenVO(JwtToken.createToken(userInfo));
     }
-
 
     @Override
     public String passwordEncrypt(String password) {

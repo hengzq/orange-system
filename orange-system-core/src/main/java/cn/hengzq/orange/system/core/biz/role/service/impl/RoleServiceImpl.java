@@ -84,11 +84,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Boolean removeById(Long id) {
-        RoleEntity entity = roleMapper.selectById(id);
-        if (Objects.isNull(entity)) {
-            return true;
-        }
-        return roleMapper.deleteById(id) > 0;
+        return roleMapper.deleteOneById(id);
     }
 
     @Override
