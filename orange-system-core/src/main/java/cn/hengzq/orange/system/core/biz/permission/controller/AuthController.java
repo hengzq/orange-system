@@ -6,7 +6,7 @@ import cn.hengzq.orange.system.common.biz.permission.vo.TokenVO;
 import cn.hengzq.orange.system.common.biz.permission.vo.param.LoginParam;
 import cn.hengzq.orange.system.common.constant.SystemConstant;
 import cn.hengzq.orange.system.core.biz.permission.service.AuthService;
-import cn.hengzq.orange.system.permission.core.service.UserService;
+import cn.hengzq.orange.system.core.biz.user.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * @author hengzq
  */
-@Tag(name = "认证管理")
+@Tag(name = "系统 - 认证管理")
 @RestController
 @AllArgsConstructor
 @RequestMapping(SystemConstant.V1_0_URL_PREFIX + "/auth")

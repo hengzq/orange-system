@@ -13,11 +13,11 @@ import cn.hengzq.orange.system.common.biz.log.vo.operation.param.OperationLogPag
 import cn.hengzq.orange.system.core.biz.log.converter.OperationLogConverter;
 import cn.hengzq.orange.system.core.biz.log.entity.OperationLogEntity;
 import cn.hengzq.orange.system.core.biz.log.service.OperationLogService;
+import cn.hengzq.orange.system.core.biz.user.service.UserService;
 import cn.hutool.core.collection.CollUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import cn.hengzq.orange.system.permission.core.service.UserService;
 
 import java.util.List;
 import java.util.Map;

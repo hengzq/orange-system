@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author hengzq
@@ -25,4 +26,6 @@ public class UpdateUserParam implements Serializable {
     @Schema(description = "手机号")
     private String phone;
 
+    @Schema(description = "用户关联的部门", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+    private List<Long> departmentIds;
 }

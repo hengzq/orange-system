@@ -13,7 +13,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-@Tag(name = "权限管理")
+@Tag(name = "系统 - 权限管理")
 @RestController
 @AllArgsConstructor
 @RequestMapping(SystemConstant.V1_0_URL_PREFIX + "/permission")

@@ -2,7 +2,7 @@ package cn.hengzq.orange.system.core.biz.user.mapper;
 
 import cn.hengzq.orange.mybatis.mapper.CommonMapper;
 import cn.hengzq.orange.mybatis.query.CommonWrappers;
-import cn.hengzq.orange.system.permission.core.entity.UserEntity;
+import cn.hengzq.orange.system.core.biz.user.entity.UserEntity;
 import org.springframework.stereotype.Repository;
 
 /**

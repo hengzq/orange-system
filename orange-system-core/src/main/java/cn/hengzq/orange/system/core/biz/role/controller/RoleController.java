@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * @author hengzq
  */
-@Tag(name = "角色管理")
+@Tag(name = "系统 - 角色管理")
 @RestController
 @AllArgsConstructor
 @RequestMapping(SystemConstant.V1_0_URL_PREFIX + "/role")

@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * @author hengzq
  */
-@Tag(name = "菜单管理")
+@Tag(name = "系统 - 菜单管理")
 @RestController
 @AllArgsConstructor
 @RequestMapping(SystemConstant.V1_0_URL_PREFIX + "/menu")

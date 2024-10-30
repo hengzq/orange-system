@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * @author hengzq
  */
-@Tag(name = "字典-数据管理")
+@Tag(name = "系统 - 字典-数据管理")
 @RestController
 @AllArgsConstructor
 @RequestMapping(SystemConstant.V1_0_URL_PREFIX + "/dict-data")

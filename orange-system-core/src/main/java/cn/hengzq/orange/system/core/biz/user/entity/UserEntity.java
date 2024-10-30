@@ -1,4 +1,4 @@
-package cn.hengzq.orange.system.permission.core.entity;
+package cn.hengzq.orange.system.core.biz.user.entity;
 
 import cn.hengzq.orange.mybatis.entity.BaseTenantEntity;
 import cn.hengzq.orange.mybatis.handler.EnumCodeTypeHandler;

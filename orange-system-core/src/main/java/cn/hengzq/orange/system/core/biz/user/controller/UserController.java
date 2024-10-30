@@ -8,7 +8,7 @@ import cn.hengzq.orange.system.common.biz.user.vo.UserDetailVO;
 import cn.hengzq.orange.system.common.biz.user.vo.UserVO;
 import cn.hengzq.orange.system.common.biz.user.vo.param.*;
 import cn.hengzq.orange.system.common.constant.SystemConstant;
-import cn.hengzq.orange.system.permission.core.service.UserService;
+import cn.hengzq.orange.system.core.biz.user.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * @author hengzq
  */
-@Tag(name = "用户管理")
+@Tag(name = "系统 - 用户管理")
 @RestController
 @AllArgsConstructor
 @RequestMapping(SystemConstant.V1_0_URL_PREFIX + "/user")

@@ -16,6 +16,9 @@ public class DictTypePageParam extends PageParam {
     @Schema(description = "字典名称")
     private String name;
 
+    @Schema(description = "字典名称 模糊查询")
+    private String nameLike;
+
     @Schema(description = "字典类型")
     private String dictType;
 }

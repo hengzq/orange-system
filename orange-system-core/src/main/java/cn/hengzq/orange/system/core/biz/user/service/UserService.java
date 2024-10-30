@@ -1,4 +1,4 @@
-package cn.hengzq.orange.system.permission.core.service;
+package cn.hengzq.orange.system.core.biz.user.service;
 
 import cn.hengzq.orange.common.dto.PageDTO;
 import cn.hengzq.orange.system.common.biz.user.vo.UserDetailVO;

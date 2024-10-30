@@ -69,15 +69,19 @@ public class DictTypeServiceImpl implements DictTypeService {
 
     @Override
     public PageDTO<DictTypeVO> page(DictTypePageParam param) {
-        PageDTO<DictTypeEntity> page = dictTypeMapper.selectPage(param,
-                CommonWrappers.<DictTypeEntity>lambdaQuery().orderByDesc(BaseEntity::getCreatedAt));
+        PageDTO<DictTypeEntity> page = dictTypeMapper.selectPage(param, CommonWrappers.<DictTypeEntity>lambdaQuery()
+                .eqIfPresent(DictTypeEntity::getName, param.getName())
+                .eqIfPresent(DictTypeEntity::getDictType, param.getDictType())
+                .likeIfPresent(DictTypeEntity::getName, param.getNameLike())
+                .orderByDesc(BaseEntity::getCreatedAt));
         return DictTypeConverter.INSTANCE.toPage(page);
     }
 
     @Override
-    public List<DictTypeVO> list(DictTypeListParam queryVo) {
+    public List<DictTypeVO> list(DictTypeListParam param) {
         List<DictTypeEntity> entityList = dictTypeMapper.selectList(CommonWrappers.<DictTypeEntity>lambdaQuery()
-        );
+                .eqIfPresent(DictTypeEntity::getName, param.getName())
+                .eqIfPresent(DictTypeEntity::getDictType, param.getDictType()));
         return DictTypeConverter.INSTANCE.toListVO(entityList);
     }
 

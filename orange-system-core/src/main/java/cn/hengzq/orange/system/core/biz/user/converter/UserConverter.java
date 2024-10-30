@@ -6,7 +6,7 @@ import cn.hengzq.orange.common.dto.PageDTO;
 import cn.hengzq.orange.system.common.biz.user.vo.UserVO;
 import cn.hengzq.orange.system.common.biz.user.vo.param.AddUserParam;
 import cn.hengzq.orange.system.common.biz.user.vo.param.UpdateUserParam;
-import cn.hengzq.orange.system.permission.core.entity.UserEntity;
+import cn.hengzq.orange.system.core.biz.user.entity.UserEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;

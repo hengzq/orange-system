@@ -14,10 +14,10 @@ import cn.hengzq.orange.system.common.biz.user.vo.UserVO;
 import cn.hengzq.orange.system.common.biz.user.vo.param.*;
 import cn.hengzq.orange.system.core.biz.role.service.RoleService;
 import cn.hengzq.orange.system.core.biz.user.converter.UserConverter;
+import cn.hengzq.orange.system.core.biz.user.entity.UserEntity;
 import cn.hengzq.orange.system.core.biz.user.mapper.UserMapper;
-import cn.hengzq.orange.system.permission.core.entity.UserEntity;
-import cn.hengzq.orange.system.permission.core.service.UserDepartmentRlService;
-import cn.hengzq.orange.system.permission.core.service.UserService;
+import cn.hengzq.orange.system.core.biz.user.service.UserDepartmentRlService;
+import cn.hengzq.orange.system.core.biz.user.service.UserService;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
@@ -64,10 +64,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public Boolean updateById(Long id, UpdateUserParam param) {
         UserEntity entity = userMapper.selectById(id);
         Assert.nonNull(entity, UserErrorCode.GLOBAL_DATA_NOT_EXIST);
         entity = UserConverter.INSTANCE.toUpdateEntity(entity, param);
+        if (CollUtil.isNotEmpty(param.getDepartmentIds())) {
+            userDepartmentRlService.removeByUserId(id);
+            userDepartmentRlService.addUserDepartmentRelation(id, param.getDepartmentIds());
+        }
         return userMapper.updateOneById(entity);
     }
 
