@@ -1,23 +1,30 @@
 package cn.hengzq.orange.system.log.starter.config;
 
+import cn.hengzq.orange.system.api.biz.log.LoginLogApi;
+import cn.hengzq.orange.system.api.biz.log.OperationLogApi;
 import cn.hengzq.orange.system.log.starter.aspect.LogAspect;
-import cn.hengzq.orange.system.log.starter.properties.LogProperties;
+import cn.hengzq.orange.system.log.starter.listener.LoginLogListener;
+import cn.hengzq.orange.system.log.starter.listener.OperationLogListener;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadPoolExecutor;
 
 @Slf4j
+@EnableAsync
 @AutoConfiguration
 @AllArgsConstructor
 @EnableConfigurationProperties(value = LogProperties.class)
-public class LogBaseAutoConfiguration {
+@ConditionalOnProperty(prefix = LogProperties.PREFIX, name = "enabled", havingValue = "true")
+public class LogAutoConfiguration {
 
     private final LogProperties logProperties;
 
@@ -49,4 +56,17 @@ public class LogBaseAutoConfiguration {
         }
         return executor;
     }
+
+    @Bean
+    public OperationLogListener operationRecordListener(OperationLogApi operationLogApi) {
+        log.info("init operationRecordListener complete.");
+        return new OperationLogListener(operationLogApi);
+    }
+
+    @Bean
+    public LoginLogListener loginRecordListener(LoginLogApi loginLogApi) {
+        log.info("init loginRecordListener complete.");
+        return new LoginLogListener(loginLogApi);
+    }
+
 }

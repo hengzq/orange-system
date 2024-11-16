@@ -1,4 +1,4 @@
-package cn.hengzq.orange.system.api.log;
+package cn.hengzq.orange.system.api.biz.log;
 
 import cn.hengzq.orange.system.common.biz.log.vo.login.param.AddLoginLogParam;
 

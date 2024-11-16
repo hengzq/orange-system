@@ -1,8 +1,8 @@
-package cn.hengzq.orange.system.api.log.impl;
+package cn.hengzq.orange.system.api.biz.log.impl;
 
+import cn.hengzq.orange.system.api.biz.log.OperationLogApi;
 import cn.hengzq.orange.system.api.client.SystemRestClient;
-import cn.hengzq.orange.system.api.log.OperationLogApi;
-import cn.hengzq.orange.system.api.log.client.OperationLogClient;
+import cn.hengzq.orange.system.api.biz.log.client.OperationLogClient;
 import cn.hengzq.orange.system.common.biz.log.vo.operation.param.AddOperationLogParam;
 import lombok.extern.slf4j.Slf4j;
 

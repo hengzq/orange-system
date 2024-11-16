@@ -1,7 +1,7 @@
 package cn.hengzq.orange.system.log.starter.listener;
 
 import cn.hengzq.orange.common.util.IPAddressUtil;
-import cn.hengzq.orange.system.api.log.OperationLogApi;
+import cn.hengzq.orange.system.api.biz.log.OperationLogApi;
 import cn.hengzq.orange.system.common.biz.log.vo.operation.param.AddOperationLogParam;
 import cn.hengzq.orange.system.log.starter.event.OperationLogEvent;
 import lombok.extern.slf4j.Slf4j;

@@ -1,4 +1,4 @@
-package cn.hengzq.orange.system.log.starter.properties;
+package cn.hengzq.orange.system.log.starter.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -7,8 +7,9 @@ import org.springframework.stereotype.Component;
 import java.util.Set;
 
 /**
-  *
- * @ 日志配置
+ * 日志配置
+ *
+ * @author hengzq
  */
 @Data
 @Component
@@ -23,7 +24,7 @@ public class LogProperties {
     /**
      * 是否启用
      */
-    private boolean enabled;
+    private boolean enabled = true;
 
     /**
      * 操作记录需要忽略的请求

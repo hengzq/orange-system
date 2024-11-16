@@ -1,4 +1,4 @@
-package cn.hengzq.orange.system.api.log.client;
+package cn.hengzq.orange.system.api.biz.log.client;
 
 import cn.hengzq.orange.common.result.Result;
 import cn.hengzq.orange.system.common.biz.log.vo.operation.param.AddOperationLogParam;

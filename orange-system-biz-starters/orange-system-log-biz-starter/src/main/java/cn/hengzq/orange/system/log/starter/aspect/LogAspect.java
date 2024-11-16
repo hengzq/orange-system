@@ -9,7 +9,7 @@ import cn.hengzq.orange.system.common.biz.log.vo.login.param.AddLoginLogParam;
 import cn.hengzq.orange.system.common.biz.log.vo.operation.param.AddOperationLogParam;
 import cn.hengzq.orange.system.log.starter.event.LoginLogEvent;
 import cn.hengzq.orange.system.log.starter.event.OperationLogEvent;
-import cn.hengzq.orange.system.log.starter.properties.LogProperties;
+import cn.hengzq.orange.system.log.starter.config.LogProperties;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.LocalDateTimeUtil;
 import cn.hutool.core.exceptions.ExceptionUtil;
@@ -27,7 +27,6 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.context.ApplicationContext;
 import org.springframework.util.AntPathMatcher;
 
-import java.lang.annotation.Annotation;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
