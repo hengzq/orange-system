@@ -124,5 +124,4 @@ INSERT INTO sys_menu (id, tenant_id, parent_id, name, permission, preset, path, 
 VALUES (52, @t_id, 50, '操作日志', 'system:operation-log:view', 0, 'system-log/operation', 'system-reader', 0, 20,
         @u_id);
 
-
 COMMIT;

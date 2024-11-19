@@ -49,6 +49,16 @@
             </dependency>
             <dependency>
                 <groupId>cn.hengzq.orange</groupId>
+                <artifactId>orange-system-storage-local-biz-starter</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hengzq.orange</groupId>
+                <artifactId>orange-system-storage-aliyun-biz-starter</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hengzq.orange</groupId>
                 <artifactId>orange-system-core</artifactId>
                 <version>${revision}</version>
             </dependency>

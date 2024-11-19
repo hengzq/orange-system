@@ -5,7 +5,7 @@ import cn.hengzq.orange.common.dto.PageDTO;
 import cn.hengzq.orange.common.util.Assert;
 import cn.hengzq.orange.common.util.CollUtils;
 import cn.hengzq.orange.mybatis.query.CommonWrappers;
-import cn.hengzq.orange.system.api.log.OperationLogApi;
+import cn.hengzq.orange.system.api.biz.log.OperationLogApi;
 import cn.hengzq.orange.system.core.biz.log.mapper.OperationLogMapper;
 import cn.hengzq.orange.system.common.biz.log.vo.operation.OperationLogVO;
 import cn.hengzq.orange.system.common.biz.log.vo.operation.param.AddOperationLogParam;

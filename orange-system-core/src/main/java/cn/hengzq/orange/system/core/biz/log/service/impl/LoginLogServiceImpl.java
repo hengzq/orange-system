@@ -5,7 +5,7 @@ import cn.hengzq.orange.common.dto.PageDTO;
 import cn.hengzq.orange.common.util.Assert;
 import cn.hengzq.orange.common.util.CollUtils;
 import cn.hengzq.orange.mybatis.query.CommonWrappers;
-import cn.hengzq.orange.system.api.log.LoginLogApi;
+import cn.hengzq.orange.system.api.biz.log.LoginLogApi;
 import cn.hengzq.orange.system.common.biz.log.vo.login.LoginLogVO;
 import cn.hengzq.orange.system.common.biz.log.vo.login.param.AddLoginLogParam;
 import cn.hengzq.orange.system.common.biz.log.vo.login.param.LoginLogPageParam;
@@ -68,8 +68,10 @@ public class LoginLogServiceImpl implements LoginLogService, LoginLogApi {
         LoginLogVO vo = LoginLogConverter.INSTANCE.toVO(entity);
         Assert.nonNull(vo, GlobalErrorCodeConstant.GLOBAL_PARAMETER_ID_IS_INVALID);
 
-        Map<Long, String> userNameMap = userService.getNameMapByIds(Set.of(vo.getUserId()));
-        vo.setUserName(userNameMap.get(vo.getUserId()));
+        if (Objects.nonNull(vo.getUserId())) {
+            Map<Long, String> userNameMap = userService.getNameMapByIds(Set.of(vo.getUserId()));
+            vo.setUserName(userNameMap.get(vo.getUserId()));
+        }
         return vo;
     }
 }

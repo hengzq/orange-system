@@ -17,6 +17,8 @@
 
     <modules>
         <module>orange-system-log-biz-starter</module>
+        <module>orange-system-storage-local-biz-starter</module>
+        <module>orange-system-storage-aliyun-biz-starter</module>
     </modules>
 
 </project>

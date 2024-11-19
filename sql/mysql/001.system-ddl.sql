@@ -239,7 +239,7 @@ CREATE TABLE IF NOT EXISTS sys_login_log
     `tenant_id`     bigint(20) NOT NULL COMMENT '租户id',
     `request_id`    varchar(64)         DEFAULT '' COMMENT '请求ID',
     `account`       varchar(64)         DEFAULT '' COMMENT '用户账号',
-    `type`          tinyint(1)          DEFAULT NULL COMMENT '操作类型,0-登陆 1-登出',
+    `type`          tinyint(1)          DEFAULT NULL COMMENT '类型,0-登陆 1-登出',
     `user_id`       bigint(32)          DEFAULT NULL COMMENT '登录用户ID',
     `user_ip`       varchar(32)         DEFAULT '' COMMENT '用户IP',
     `user_location` varchar(64)         DEFAULT NULL COMMENT '登录地点',
@@ -252,3 +252,25 @@ CREATE TABLE IF NOT EXISTS sys_login_log
     `updated_at`    datetime   NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB COMMENT ='系统日志';
+
+-- ----------------------------
+-- 存储 - 对象管理
+-- ----------------------------
+CREATE TABLE IF NOT EXISTS `sys_storage_object`
+(
+    `id`            bigint(20) NOT NULL COMMENT '表的主键',
+    `tenant_id`     bigint(20) NOT NULL COMMENT '租户id',
+    `mode`          varchar(64)         DEFAULT NULL COMMENT '存储方式',
+    `original_name` varchar(256)        DEFAULT NULL COMMENT '对象原名称',
+    `relative_path` varchar(1024)       DEFAULT NULL COMMENT '相对路径',
+    `type`          varchar(64)         DEFAULT null COMMENT '对象类型',
+    `size`          bigint              DEFAULT NULL COMMENT '对象大小',
+    `preview_url`   varchar(1024)       DEFAULT NULL COMMENT '图片预览地址',
+    `download_url`  varchar(1024)       DEFAULT NULL COMMENT '文件下载地址',
+    `created_by`    bigint(20)          DEFAULT NULL COMMENT '创建人',
+    `created_at`    datetime   NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updated_by`    bigint(20)          DEFAULT NULL COMMENT '更新人',
+    `updated_at`    datetime   NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB COMMENT ='存储 - 对象管理';
+
