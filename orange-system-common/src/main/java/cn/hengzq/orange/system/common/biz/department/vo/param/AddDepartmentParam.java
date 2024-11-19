@@ -1,6 +1,8 @@
 package cn.hengzq.orange.system.common.biz.department.vo.param;
 
+import cn.hengzq.orange.system.common.biz.department.constant.DepartmentErrorCode;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
@@ -16,7 +18,7 @@ public class AddDepartmentParam implements Serializable {
     @Schema(description = "父级ID,默认:-1（为顶级部门）")
     private Long parentId;
 
-    //    @NotBlank(message = DepartmentErrorCode.DEPARTMENT_NAME_CANNOT_NULL_KEY)
+    @NotBlank(message = DepartmentErrorCode.DEPARTMENT_NAME_CANNOT_NULL_CODE)
     @Schema(description = "部门名称")
     private String name;
 
