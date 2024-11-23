@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * @author hengzq
  */
-@Tag(name = "系统 - 日志-操作记录管理")
+@Tag(name = "系统 - 日志 - 操作记录管理")
 @RestController
 @AllArgsConstructor
 @RequestMapping(SystemConstant.V1_0_URL_PREFIX + "/operation-log")
