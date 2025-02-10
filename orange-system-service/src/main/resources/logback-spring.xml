@@ -47,7 +47,7 @@ debug：当此属性设置为true时，将打印出logback内部日志信息，�
     </appender>
 
     <logger name="org.springframework" level="warn"/>
-    <logger name="cc.orangeai" level="debug"/>
+    <logger name="cn.hengzq.orange" level="debug"/>
 
     <!--root是默认的logger 这里设定输出级别是debug-->
     <root level="INFO">

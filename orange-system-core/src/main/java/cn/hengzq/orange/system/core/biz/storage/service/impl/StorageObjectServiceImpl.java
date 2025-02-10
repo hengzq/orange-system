@@ -91,8 +91,8 @@ public class StorageObjectServiceImpl implements StorageObjectService, StorageOb
         entity.setId(id);
         entity.setOriginalName(originalName);
         entity.setMode(storageService.getStorageMode());
-        entity.setPreviewUrl(URLUtil.normalize(storageService.getStorageProperties().getServicePath() + "/" + StorageConstant.PREVIEW_IMAGE_BY_ID_URL + id, false, true));
-        entity.setDownloadUrl(URLUtil.normalize(storageService.getStorageProperties().getServicePath() + "/" + StorageConstant.DOWNLOAD_BY_ID_URL + id, false, true));
+        entity.setPreviewUrl(URLUtil.normalize(storageService.getStorageProperties().getServicePath() + "/" + result.getRelativePath(), false, true));
+        entity.setDownloadUrl(URLUtil.normalize(storageService.getStorageProperties().getServicePath() + "/" + result.getRelativePath(), false, true));
         storageObjectMapper.insertOne(entity);
         return StorageObjectConverter.INSTANCE.toVO(entity);
     }
