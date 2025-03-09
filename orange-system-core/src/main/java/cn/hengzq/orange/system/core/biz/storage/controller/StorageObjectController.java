@@ -13,6 +13,7 @@ import cn.hengzq.orange.system.core.biz.storage.service.StorageObjectService;
 import cn.hutool.core.util.StrUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.core.io.InputStreamResource;
@@ -64,15 +65,13 @@ public class StorageObjectController {
     }
 
 
-    /**
-     * 文件下载接口
-     * 依赖：{@link cn.hengzq.orange.system.common.biz.storage.constant.StorageConstant.DOWNLOAD_BY_ID_URL}
-     */
-    @Operation(summary = "根据文件ID下载文件")
-    @GetMapping("/download/{id}")
-    public ResponseEntity<InputStreamResource> downloadFile(@PathVariable Long id) {
-        StorageByteObjectVO byteObjectVO = storageObjectService.getByteArrayById(id);
+    @Operation(summary = "下载或预览文件")
+    @GetMapping("/static/**")
+    public ResponseEntity<InputStreamResource> staticFile(HttpServletRequest request) {
+        String fileName = request.getRequestURI().substring(request.getRequestURI().indexOf("/static/") + "/static/".length());
+        StorageByteObjectVO byteObjectVO = storageObjectService.getByteArrayByIFileName(fileName);
         InputStreamResource resource = new InputStreamResource(new ByteArrayInputStream(byteObjectVO.getContent()));
+
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + byteObjectVO.getOriginalName())
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
@@ -80,20 +79,37 @@ public class StorageObjectController {
 
     }
 
-    /**
-     * 用于图片预览接口
-     * 依赖：{@link cn.hengzq.orange.system.common.biz.storage.constant.StorageConstant.PREVIEW_IMAGE_BY_ID_URL}
-     */
-    @Operation(summary = "根据图片ID预览")
-    @GetMapping(value = "/preview-image/{id}")
-    public ResponseEntity<InputStreamResource> previewImage(@PathVariable Long id) {
-        StorageByteObjectVO byteObjectVO = storageObjectService.getByteArrayById(id);
-        InputStreamResource resource = new InputStreamResource(new ByteArrayInputStream(byteObjectVO.getContent()));
-        return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "inline;filename=" + byteObjectVO.getOriginalName())
-                .contentType(MediaType.IMAGE_PNG) // 根据实际图片格式调整
-                .body(resource);
 
-    }
+//    /**
+//     * 文件下载接口
+//     * 依赖：{@link cn.hengzq.orange.system.common.biz.storage.constant.StorageConstant.DOWNLOAD_BY_ID_URL}
+//     */
+//    @Operation(summary = "根据文件ID下载文件")
+//    @GetMapping("/download/{id}")
+//    public ResponseEntity<InputStreamResource> downloadFile(@PathVariable Long id) {
+//        StorageByteObjectVO byteObjectVO = storageObjectService.getByteArrayById(id);
+//        InputStreamResource resource = new InputStreamResource(new ByteArrayInputStream(byteObjectVO.getContent()));
+//        return ResponseEntity.ok()
+//                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + byteObjectVO.getOriginalName())
+//                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+//                .body(resource);
+//
+//    }
+
+//    /**
+//     * 用于图片预览接口
+//     * 依赖：{@link cn.hengzq.orange.system.common.biz.storage.constant.StorageConstant.PREVIEW_IMAGE_BY_ID_URL}
+//     */
+//    @Operation(summary = "根据图片ID预览")
+//    @GetMapping(value = "/preview-image/{id}")
+//    public ResponseEntity<InputStreamResource> previewImage(@PathVariable Long id) {
+//        StorageByteObjectVO byteObjectVO = storageObjectService.getByteArrayById(id);
+//        InputStreamResource resource = new InputStreamResource(new ByteArrayInputStream(byteObjectVO.getContent()));
+//        return ResponseEntity.ok()
+//                .header(HttpHeaders.CONTENT_DISPOSITION, "inline;filename=" + byteObjectVO.getOriginalName())
+//                .contentType(MediaType.IMAGE_PNG) // 根据实际图片格式调整
+//                .body(resource);
+//
+//    }
 
 }

@@ -7,11 +7,11 @@ import cn.hengzq.orange.system.common.biz.storage.service.StorageProperties;
 import cn.hengzq.orange.system.common.biz.storage.service.impl.AbstractStorageService;
 import cn.hengzq.orange.system.common.biz.storage.vo.UploadResult;
 import cn.hutool.core.io.FileUtil;
-import cn.hutool.core.util.URLUtil;
 import com.hengzq.orange.system.storage.local.starter.config.LocalStorageProperties;
 
 import java.io.File;
-import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class LocalStorageServiceImpl extends AbstractStorageService {
 
@@ -39,15 +39,21 @@ public class LocalStorageServiceImpl extends AbstractStorageService {
             return UploadResult.builder()
                     .size((long) content.length)
                     .type(FileUtil.extName(relativePath))
-                    .relativePath(relativePath)
+                    .fileName(FileUtil.normalize(relativePath))
                     .build();
         } catch (Exception e) {
             throw new ServiceException(GlobalErrorCodeConstant.GLOBAL_DATA_NOT_EXIST);
         }
     }
 
+
     @Override
     public byte[] getObjectByRelativePath(String relativePath) {
-        return null;
+        String absolutePath = FileUtil.normalize(properties.getBasePath() + File.separator + relativePath);
+        try {
+            return Files.readAllBytes(Paths.get(absolutePath));
+        } catch (Exception e) {
+            throw new ServiceException(GlobalErrorCodeConstant.GLOBAL_DATA_NOT_EXIST);
+        }
     }
 }

@@ -3,7 +3,6 @@ package cn.hengzq.orange.system.core.biz.storage.service.impl;
 import cn.hengzq.orange.common.constant.GlobalErrorCodeConstant;
 import cn.hengzq.orange.common.util.Assert;
 import cn.hengzq.orange.system.api.biz.storage.StorageObjectApi;
-import cn.hengzq.orange.system.common.biz.storage.constant.StorageConstant;
 import cn.hengzq.orange.system.common.biz.storage.service.StorageService;
 import cn.hengzq.orange.system.common.biz.storage.service.StorageServiceFactory;
 import cn.hengzq.orange.system.common.biz.storage.vo.StorageByteObjectVO;
@@ -17,8 +16,7 @@ import cn.hengzq.orange.system.core.biz.storage.mapper.StorageObjectMapper;
 import cn.hengzq.orange.system.core.biz.storage.service.StorageObjectService;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.io.FileUtil;
-import cn.hutool.core.util.IdUtil;
-import cn.hutool.core.util.URLUtil;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -64,7 +62,7 @@ public class StorageObjectServiceImpl implements StorageObjectService, StorageOb
             return null;
         }
         StorageService storageService = StorageServiceFactory.getStorageService(entity.getMode());
-        byte[] content = storageService.getObjectByRelativePath(entity.getRelativePath());
+        byte[] content = storageService.getObjectByRelativePath(entity.getFileName());
         StorageByteObjectVO result = StorageObjectConverter.INSTANCE.toByteVO(entity);
         result.setContent(content);
         return result;
@@ -77,6 +75,19 @@ public class StorageObjectServiceImpl implements StorageObjectService, StorageOb
         return StorageObjectConverter.INSTANCE.toVO(entity);
     }
 
+    @Override
+    public StorageByteObjectVO getByteArrayByIFileName(String fileName) {
+        StorageObjectEntity entity = storageObjectMapper.selectOne(Wrappers.<StorageObjectEntity>lambdaQuery().eq(StorageObjectEntity::getFileName, fileName));
+        if (entity == null) {
+            return null;
+        }
+        StorageService storageService = StorageServiceFactory.getStorageService(entity.getMode());
+        byte[] content = storageService.getObjectByRelativePath(entity.getFileName());
+        StorageByteObjectVO result = StorageObjectConverter.INSTANCE.toByteVO(entity);
+        result.setContent(content);
+        return result;
+    }
+
 
     @Override
     public StorageObjectVO upload(byte[] content, String originalName) {
@@ -87,12 +98,8 @@ public class StorageObjectServiceImpl implements StorageObjectService, StorageOb
         UploadResult result = storageService.upload(content, relativePath);
 
         StorageObjectEntity entity = StorageObjectConverter.INSTANCE.toEntity(result);
-        long id = IdUtil.getSnowflakeNextId();
-        entity.setId(id);
         entity.setOriginalName(originalName);
         entity.setMode(storageService.getStorageMode());
-        entity.setPreviewUrl(URLUtil.normalize(storageService.getStorageProperties().getServicePath() + "/" + result.getRelativePath(), false, true));
-        entity.setDownloadUrl(URLUtil.normalize(storageService.getStorageProperties().getServicePath() + "/" + result.getRelativePath(), false, true));
         storageObjectMapper.insertOne(entity);
         return StorageObjectConverter.INSTANCE.toVO(entity);
     }

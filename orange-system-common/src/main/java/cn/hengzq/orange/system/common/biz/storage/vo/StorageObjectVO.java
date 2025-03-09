@@ -18,17 +18,11 @@ public class StorageObjectVO implements Serializable {
     private String originalName;
 
     @Schema(description = "新名称")
-    private String newName;
+    private String fileName;
 
     @Schema(description = "文件类型")
     private String type;
 
-    @Schema(description = "文件大小")
+    @Schema(description = "文件大小 单位：字节")
     private Long size;
-
-    @Schema(description = "文件下载地址URL")
-    private String downloadUrl;
-
-    @Schema(description = "预览地址URL")
-    private String previewUrl;
 }

@@ -15,8 +15,8 @@ import java.io.Serializable;
 @Schema(description = "系统 - 存储 - 文件上传结果")
 public class UploadResult implements Serializable {
 
-    @Schema(description = "相对路径")
-    private String relativePath;
+    @Schema(description = "文件名称")
+    private String fileName;
 
     @Schema(description = "文件类型")
     private String type;

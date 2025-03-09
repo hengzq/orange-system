@@ -21,4 +21,6 @@ public interface StorageObjectService {
     StorageByteObjectVO getByteArrayById(Long id);
 
     StorageObjectVO getById(Long id);
+
+    StorageByteObjectVO getByteArrayByIFileName(String fileName);
 }

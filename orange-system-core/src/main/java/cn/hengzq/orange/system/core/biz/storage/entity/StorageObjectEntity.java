@@ -27,8 +27,8 @@ public class StorageObjectEntity extends BaseTenantEntity {
     @TableField("original_name")
     private String originalName;
 
-    @TableField("relative_path")
-    private String relativePath;
+    @TableField("file_name")
+    private String fileName;
 
     @TableField("type")
     private String type;
@@ -36,9 +36,4 @@ public class StorageObjectEntity extends BaseTenantEntity {
     @TableField("size")
     private Long size;
 
-    @TableField("download_url")
-    private String downloadUrl;
-
-    @TableField("preview_url")
-    private String previewUrl;
 }

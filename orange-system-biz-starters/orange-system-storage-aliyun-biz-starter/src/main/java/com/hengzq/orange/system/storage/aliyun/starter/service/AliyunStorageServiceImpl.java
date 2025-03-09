@@ -7,7 +7,6 @@ import cn.hengzq.orange.system.common.biz.storage.service.StorageProperties;
 import cn.hengzq.orange.system.common.biz.storage.service.impl.AbstractStorageService;
 import cn.hengzq.orange.system.common.biz.storage.vo.UploadResult;
 import cn.hutool.core.io.FileUtil;
-import cn.hutool.core.util.URLUtil;
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
 import com.aliyun.oss.model.OSSObject;
@@ -49,7 +48,7 @@ public class AliyunStorageServiceImpl extends AbstractStorageService {
             return UploadResult.builder()
                     .size((long) content.length)
                     .type(FileUtil.extName(relativePath))
-                    .relativePath(relativePath)
+                    .fileName(relativePath)
                     .build();
         } catch (Exception e) {
             throw new ServiceException(GlobalErrorCodeConstant.GLOBAL_DATA_NOT_EXIST);
