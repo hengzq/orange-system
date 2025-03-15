@@ -2,7 +2,7 @@ package cn.hengzq.orange.system.core.biz.storage.entity;
 
 import cn.hengzq.orange.mybatis.entity.BaseTenantEntity;
 import cn.hengzq.orange.mybatis.handler.EnumCodeTypeHandler;
-import cn.hengzq.orange.system.common.biz.storage.constant.StorageModeEnum;
+import cn.hengzq.orange.storage.constant.StorageMode;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -22,7 +22,7 @@ public class StorageObjectEntity extends BaseTenantEntity {
     private Long id;
 
     @TableField(value = "mode", typeHandler = EnumCodeTypeHandler.class)
-    private StorageModeEnum mode;
+    private StorageMode mode;
 
     @TableField("original_name")
     private String originalName;

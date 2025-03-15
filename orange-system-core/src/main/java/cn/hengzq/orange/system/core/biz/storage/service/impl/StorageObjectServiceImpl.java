@@ -2,12 +2,12 @@ package cn.hengzq.orange.system.core.biz.storage.service.impl;
 
 import cn.hengzq.orange.common.constant.GlobalErrorCodeConstant;
 import cn.hengzq.orange.common.util.Assert;
+import cn.hengzq.orange.storage.StorageService;
+import cn.hengzq.orange.storage.StorageServiceFactory;
+import cn.hengzq.orange.storage.dto.UploadFileResult;
 import cn.hengzq.orange.system.api.biz.storage.StorageObjectApi;
-import cn.hengzq.orange.system.common.biz.storage.service.StorageService;
-import cn.hengzq.orange.system.common.biz.storage.service.StorageServiceFactory;
 import cn.hengzq.orange.system.common.biz.storage.vo.StorageByteObjectVO;
 import cn.hengzq.orange.system.common.biz.storage.vo.StorageObjectVO;
-import cn.hengzq.orange.system.common.biz.storage.vo.UploadResult;
 import cn.hengzq.orange.system.common.biz.storage.vo.param.StorageObjectUploadParam;
 import cn.hengzq.orange.system.common.util.StorageUtil;
 import cn.hengzq.orange.system.core.biz.storage.converter.StorageObjectConverter;
@@ -94,8 +94,8 @@ public class StorageObjectServiceImpl implements StorageObjectService, StorageOb
         String newFileName = StorageUtil.getNewFileName(originalName);
         String relativePath = StorageUtil.getRelativePath() + File.separator + newFileName;
 
-        StorageService storageService = StorageServiceFactory.getStorageService();
-        UploadResult result = storageService.upload(content, relativePath);
+        StorageService storageService = StorageServiceFactory.getDefaultStorageService();
+        UploadFileResult result = storageService.upload(content, relativePath);
 
         StorageObjectEntity entity = StorageObjectConverter.INSTANCE.toEntity(result);
         entity.setOriginalName(originalName);

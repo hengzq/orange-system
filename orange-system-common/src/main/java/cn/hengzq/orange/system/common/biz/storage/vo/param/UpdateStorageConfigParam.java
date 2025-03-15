@@ -1,11 +1,9 @@
 package cn.hengzq.orange.system.common.biz.storage.vo.param;
 
-import cn.hengzq.orange.system.common.biz.storage.constant.StorageModeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Map;
 
 /**
  * @author hengzq
