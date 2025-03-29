@@ -31,19 +31,19 @@ public class UserController {
 
     @Operation(summary = "新建", operationId = "system:user:add")
     @PostMapping
-    public Result<Long> add(@RequestBody @Validated AddUserParam param) {
+    public Result<String> add(@RequestBody @Validated AddUserParam param) {
         return ResultWrapper.ok(userService.add(param));
     }
 
     @Operation(summary = "根据ID删除", operationId = "system:user:delete")
     @DeleteMapping("/{id}")
-    public Result<Boolean> removeById(@PathVariable("id") Long id) {
+    public Result<Boolean> removeById(@PathVariable("id") String id) {
         return ResultWrapper.ok(userService.removeById(id));
     }
 
     @Operation(summary = "根据ID更新", operationId = "system:user:update")
     @PutMapping("/{id}")
-    public Result<Boolean> updateById(@PathVariable("id") Long id, @RequestBody @Validated UpdateUserParam param) {
+    public Result<Boolean> updateById(@PathVariable("id") String id, @RequestBody @Validated UpdateUserParam param) {
         return ResultWrapper.ok(userService.updateById(id, param));
     }
 
@@ -55,7 +55,7 @@ public class UserController {
 
     @Operation(summary = "根据ID查询", operationId = "system:user:get")
     @GetMapping("/{id}")
-    public Result<UserDetailVO> getById(@PathVariable("id") Long id, @ParameterObject UserDetailQueryParam param) {
+    public Result<UserDetailVO> getById(@PathVariable("id") String id, @ParameterObject UserDetailQueryParam param) {
         return ResultWrapper.ok(userService.getById(id, param));
     }
 

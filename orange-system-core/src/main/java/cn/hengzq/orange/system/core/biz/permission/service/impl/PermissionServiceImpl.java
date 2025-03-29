@@ -59,7 +59,7 @@ public class PermissionServiceImpl implements PermissionService {
     public Boolean assignRolesToOneUser(AssignRolesToOneUserParam param) {
         userRoleRlMapper.deleteByUserId(param.getUserId());
         List<UserRoleRlEntity> rlEntityList = new ArrayList<>(param.getRoleIds().size());
-        for (Long roleId : param.getRoleIds()) {
+        for (String roleId : param.getRoleIds()) {
             rlEntityList.add(new UserRoleRlEntity(param.getUserId(), roleId));
         }
         userRoleRlMapper.insert(rlEntityList);
@@ -69,12 +69,12 @@ public class PermissionServiceImpl implements PermissionService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Boolean assignResourcesToOneRole(AssignResourcesToOneRoleParam param) {
-        Long roleId = param.getRoleId();
+        String roleId = param.getRoleId();
         roleResourceRlMapper.deleteByRoleId(roleId);
         log.info("clean up. roleId:{}", roleId);
 
-        List<Long> menuIds = param.getMenuIds();
-        List<Long> buttonIds = param.getButtonIds();
+        List<String> menuIds = param.getMenuIds();
+        List<String> buttonIds = param.getButtonIds();
 
         log.info("roleId:{},menuIds:{},buttonIds:{}", roleId, menuIds, buttonIds);
         List<RoleResourceRlEntity> roleResourceRlEntityList = new ArrayList<>();
@@ -95,7 +95,7 @@ public class PermissionServiceImpl implements PermissionService {
 
     @Override
     public AuthUserInfoVO getUserInfo() {
-        Long userId = GlobalContextHelper.getUserId();
+        String userId = GlobalContextHelper.getUserId();
         UserEntity entity = userMapper.selectById(userId);
         AuthUserInfoVO authUserInfoVO = BeanUtil.copyProperties(entity, AuthUserInfoVO.class);
         Assert.nonNull(authUserInfoVO, GlobalErrorCodeConstant.GLOBAL_PARAMETER_ID_IS_INVALID);
@@ -109,7 +109,7 @@ public class PermissionServiceImpl implements PermissionService {
         authUserInfoVO.setRolePermissions(rolePerms);
 
         // 封装菜单
-        List<Long> roleIds = CollUtils.convertList(roleVOS, RoleVO::getId);
+        List<String> roleIds = CollUtils.convertList(roleVOS, RoleVO::getId);
 
         List<MenuDetailVO> menuVOList;
         // admin 拥有所有的权限
@@ -128,7 +128,7 @@ public class PermissionServiceImpl implements PermissionService {
         authUserInfoVO.setMenuPermissions(CollUtils.convertList(menuVOList, MenuDetailVO::getPermission));
 
         // 封装按钮
-        List<Long> menuIds = CollUtils.convertList(menuVOList, MenuDetailVO::getId);
+        List<String> menuIds = CollUtils.convertList(menuVOList, MenuDetailVO::getId);
         List<ButtonVO> buttonVOS;
         if (rolePerms.contains(GlobalConstant.SUPER_ADMIN_ROLE)) {
             buttonVOS = buttonService.list(ButtonListParam.builder().menuIds(menuIds).build());

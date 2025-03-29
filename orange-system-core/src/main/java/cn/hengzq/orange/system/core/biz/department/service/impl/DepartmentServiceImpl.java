@@ -38,7 +38,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     private final DepartmentMapper departmentMapper;
 
     @Override
-    public Boolean removeById(Long id) {
+    public Boolean removeById(String id) {
         DepartmentEntity entity = departmentMapper.selectById(id);
         if (Objects.isNull(entity)) {
             return Boolean.TRUE;
@@ -50,17 +50,17 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public Long add(AddDepartmentParam request) {
+    public String add(AddDepartmentParam request) {
         DepartmentEntity entity = DepartmentConverter.INSTANCE.toEntity(request);
         if (Objects.isNull(request.getParentId())) {
             entity.setParentId(GlobalConstant.DEFAULT_PARENT_ID);
         }
-       
+
         return departmentMapper.insertOne(entity);
     }
 
     @Override
-    public Boolean updateById(Long id, UpdateDepartmentParam request) {
+    public Boolean updateById(String id, UpdateDepartmentParam request) {
         DepartmentEntity entity = departmentMapper.selectById(id);
         Assert.nonNull(entity, GlobalErrorCodeConstant.GLOBAL_DATA_NOT_EXIST);
         entity = DepartmentConverter.INSTANCE.toUpdateEntity(entity, request);
@@ -68,7 +68,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public DepartmentVO getById(Long id) {
+    public DepartmentVO getById(String id) {
         return DepartmentConverter.INSTANCE.toVO(departmentMapper.selectById(id));
     }
 
@@ -89,8 +89,8 @@ public class DepartmentServiceImpl implements DepartmentService {
             return List.of();
         }
         List<DepartmentTreeVO> treeVoList = DepartmentConverter.INSTANCE.toListTreeVO(departmentVOList);
-        Map<Long, List<DepartmentTreeVO>> departmentMap = treeVoList.stream().collect(Collectors.groupingBy(DepartmentTreeVO::getParentId));
-        List<Long> deleteSubIds = new ArrayList<>();
+        Map<String, List<DepartmentTreeVO>> departmentMap = treeVoList.stream().collect(Collectors.groupingBy(DepartmentTreeVO::getParentId));
+        List<String> deleteSubIds = new ArrayList<>();
         // 组装子集
         treeVoList.forEach(item -> {
             List<DepartmentTreeVO> subList = departmentMap.get(item.getId());

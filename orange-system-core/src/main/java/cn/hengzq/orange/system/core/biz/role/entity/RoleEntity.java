@@ -19,7 +19,7 @@ public class RoleEntity extends BaseTenantEntity {
      * 角色id
      */
     @TableId(type = IdType.ASSIGN_ID)
-    private Long id;
+    private String id;
 
     /**
      * 角色名称

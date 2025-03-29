@@ -21,13 +21,13 @@ public class DepartmentEntity extends BaseTenantEntity {
      * id
      */
     @TableId(type = IdType.ASSIGN_ID)
-    private Long id;
+    private String id;
 
     /**
      * 父级别ID
      */
     @TableField("parent_id")
-    private Long parentId;
+    private String parentId;
 
     /**
      * 部门名称

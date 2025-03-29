@@ -22,6 +22,6 @@ public class LoginParam {
     private String loginPassword;
 
     @Schema(description = "租户ID, 默认:-100", defaultValue = "-100")
-    private Long tenantId = TenantConstant.DEFAULT_TENANT_ID;
+    private String tenantId = TenantConstant.DEFAULT_TENANT_ID;
 
 }

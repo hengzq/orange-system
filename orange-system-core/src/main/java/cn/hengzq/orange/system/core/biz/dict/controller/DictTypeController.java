@@ -33,25 +33,25 @@ public class DictTypeController {
 
     @Operation(summary = "新建", operationId = "system:dict-type:add")
     @PostMapping
-    public Result<Long> add(@RequestBody @Validated AddDictTypeParam param) {
+    public Result<String> add(@RequestBody @Validated AddDictTypeParam param) {
         return ResultWrapper.ok(dictTypeService.add(param));
     }
 
     @Operation(summary = "根据ID删除", operationId = "system:dict-type:delete")
     @DeleteMapping("/{id}")
-    public Result<Boolean> removeById(@PathVariable("id") Long id) {
+    public Result<Boolean> removeById(@PathVariable("id") String id) {
         return ResultWrapper.ok(dictTypeService.removeById(id));
     }
 
     @Operation(summary = "根据ID更新", operationId = "system:dict-type:update")
     @PutMapping("/{id}")
-    public Result<Boolean> update(@PathVariable("id") Long id, @RequestBody UpdateDictTypeParam param) {
+    public Result<Boolean> update(@PathVariable("id") String id, @RequestBody UpdateDictTypeParam param) {
         return ResultWrapper.ok(dictTypeService.updateById(id, param));
     }
 
     @Operation(summary = "根据ID查询详情", operationId = "system:dict-type:get")
     @GetMapping("/{id}")
-    public Result<DictTypeVO> getById(@PathVariable("id") Long id) {
+    public Result<DictTypeVO> getById(@PathVariable("id") String id) {
         return ResultWrapper.ok(dictTypeService.getById(id));
     }
 

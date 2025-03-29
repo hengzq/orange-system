@@ -12,7 +12,7 @@ import java.io.Serializable;
 public class StorageByteObjectVO implements Serializable {
 
     @Schema(description = "文件ID")
-    private Long id;
+    private String id;
 
     @Schema(description = "文件原名称")
     private String originalName;

@@ -33,14 +33,14 @@ public class DictDataServiceImpl implements DictDataService {
     private final DictDataMapper dictDataMapper;
 
     @Override
-    public Long add(AddDictDataParam param) {
+    public String add(AddDictDataParam param) {
         DictDataEntity entity = DictDataConverter.INSTANCE.toEntity(param);
        
         return dictDataMapper.insertOne(entity);
     }
 
     @Override
-    public Boolean removeById(Long id) {
+    public Boolean removeById(String id) {
         return dictDataMapper.deleteOneById(id)  ;
     }
 
@@ -55,7 +55,7 @@ public class DictDataServiceImpl implements DictDataService {
     }
 
     @Override
-    public DictDataVO getById(Long id) {
+    public DictDataVO getById(String id) {
         DictDataEntity entity = dictDataMapper.selectById(id);
         return DictDataConverter.INSTANCE.toVO(entity);
     }
@@ -68,7 +68,7 @@ public class DictDataServiceImpl implements DictDataService {
     }
 
     @Override
-    public Boolean updateById(Long id, UpdateDictDataParam param) {
+    public Boolean updateById(String id, UpdateDictDataParam param) {
         DictDataEntity entity = dictDataMapper.selectById(id);
         Assert.nonNull(entity, GlobalErrorCodeConstant.GLOBAL_DATA_NOT_EXIST);
         entity = DictDataConverter.INSTANCE.toUpdateEntity(entity, param);

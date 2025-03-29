@@ -22,7 +22,7 @@ import lombok.EqualsAndHashCode;
 public class UserEntity extends BaseTenantEntity {
 
     @TableId(type = IdType.ASSIGN_ID)
-    private Long id;
+    private String id;
 
     private String name;
 

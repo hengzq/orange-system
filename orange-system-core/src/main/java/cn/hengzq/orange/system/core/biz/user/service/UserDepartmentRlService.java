@@ -4,9 +4,9 @@ import java.util.List;
 
 public interface UserDepartmentRlService {
 
-    void addUserDepartmentRelation(Long userId, List<Long> departmentIds);
+    void addUserDepartmentRelation(String userId, List<String> departmentIds);
 
-    List<Long> listDepartmentIdsByUserId(Long userId);
+    List<String> listDepartmentIdsByUserId(String userId);
 
-    void removeByUserId(Long id);
+    void removeByUserId(String id);
 }

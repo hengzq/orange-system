@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 public class OperationLogVO extends BaseTenantDTO {
 
     @Schema(description = "主键")
-    private Long id;
+    private String id;
 
     @Schema(description = "请求ID")
     private String requestId;
@@ -48,7 +48,7 @@ public class OperationLogVO extends BaseTenantDTO {
     private String stackTrace;
 
     @Schema(description = "操作用户ID")
-    private Long userId;
+    private String userId;
 
     @Schema(description = "操作用户名称")
     private String userName;

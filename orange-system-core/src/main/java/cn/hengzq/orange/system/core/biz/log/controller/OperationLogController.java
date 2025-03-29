@@ -30,7 +30,7 @@ public class OperationLogController {
     //    @PreAuthorize("@ss.hasPermission('system:record:operation:add')")
     @Operation(summary = "新增操作日志", operationId = "system:record:operation:add")
     @PostMapping
-    public Result<Long> add(@Validated @RequestBody AddOperationLogParam param) {
+    public Result<String> add(@Validated @RequestBody AddOperationLogParam param) {
         return ResultWrapper.ok(operationLogService.add(param));
     }
 
@@ -43,7 +43,7 @@ public class OperationLogController {
 
     @Operation(summary = "根据ID查询详情", operationId = "system:record:operation:get")
     @GetMapping("/{id}")
-    public Result<OperationLogVO> getById(@PathVariable("id") Long id) {
+    public Result<OperationLogVO> getById(@PathVariable("id") String id) {
         OperationLogVO result = operationLogService.getById(id);
         return ResultWrapper.ok(result);
     }

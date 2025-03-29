@@ -18,7 +18,7 @@ import lombok.EqualsAndHashCode;
 public class DictDataEntity extends BaseTenantEntity {
 
     @TableId(type = IdType.ASSIGN_ID)
-    private Long id;
+    private String id;
 
     @TableField("dict_type")
     private String dictType;

@@ -16,7 +16,7 @@ import java.io.Serializable;
 public class UpdateMenuParam implements Serializable {
 
     @Schema(description = "父级别ID")
-    private Long parentId;
+    private String parentId;
 
     @NotNull(groups = {ValidatedGroupConstant.ADD.class}, message = MenuErrorCode.MENU_NAME_CANNOT_NULL_KEY)
     @Schema(description = "菜单名称")

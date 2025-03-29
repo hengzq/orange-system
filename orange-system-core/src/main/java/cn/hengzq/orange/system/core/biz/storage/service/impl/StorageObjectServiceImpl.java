@@ -56,7 +56,7 @@ public class StorageObjectServiceImpl implements StorageObjectService, StorageOb
     }
 
     @Override
-    public StorageByteObjectVO getByteArrayById(Long id) {
+    public StorageByteObjectVO getByteArrayById(String id) {
         StorageObjectEntity entity = storageObjectMapper.selectById(id);
         if (entity == null) {
             return null;
@@ -69,7 +69,7 @@ public class StorageObjectServiceImpl implements StorageObjectService, StorageOb
     }
 
     @Override
-    public StorageObjectVO getById(Long id) {
+    public StorageObjectVO getById(String id) {
         StorageObjectEntity entity = storageObjectMapper.selectById(id);
         Assert.nonNull(entity, GlobalErrorCodeConstant.GLOBAL_PARAMETER_ID_IS_INVALID);
         return StorageObjectConverter.INSTANCE.toVO(entity);
@@ -91,14 +91,11 @@ public class StorageObjectServiceImpl implements StorageObjectService, StorageOb
 
     @Override
     public StorageObjectVO upload(byte[] content, String originalName) {
-        String newFileName = StorageUtil.getNewFileName(originalName);
-        String relativePath = StorageUtil.getRelativePath() + File.separator + newFileName;
-
         StorageService storageService = StorageServiceFactory.getDefaultStorageService();
-        UploadFileResult result = storageService.upload(content, relativePath);
+        UploadFileResult result = storageService.upload(content, originalName);
 
         StorageObjectEntity entity = StorageObjectConverter.INSTANCE.toEntity(result);
-        entity.setOriginalName(originalName);
+        entity.setFileName(originalName);
         entity.setMode(storageService.getStorageMode());
         storageObjectMapper.insertOne(entity);
         return StorageObjectConverter.INSTANCE.toVO(entity);

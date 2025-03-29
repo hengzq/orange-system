@@ -31,7 +31,7 @@ public class AddLoginLogParam implements Serializable {
     private LoginTypeEnum type;
 
     @Schema(description = "操作用户ID")
-    private Long userId;
+    private String userId;
 
     @Schema(description = "操作用户IP")
     private String userIp;

@@ -17,12 +17,12 @@ public class AssignResourcesToOneRoleParam implements Serializable {
 
     @NotNull(message = "角色ID不能为空.")
     @Schema(description = "角色ID", requiredMode = Schema.RequiredMode.REQUIRED)
-    private Long roleId;
+    private String roleId;
 
     @NotEmpty(message = "菜单ID不能为空")
     @Schema(description = "菜单ID", requiredMode = Schema.RequiredMode.REQUIRED)
-    private List<Long> menuIds;
+    private List<String> menuIds;
 
     @Schema(description = "按钮ID")
-    private List<Long> buttonIds;
+    private List<String> buttonIds;
 }

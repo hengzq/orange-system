@@ -1,10 +1,12 @@
 package cn.hengzq.orange.system.common.biz.log.vo.operation.param;
 
-import cn.hengzq.orange.common.dto.BaseTenantDTO;
 import cn.hengzq.orange.common.enums.support.OperationStatusEnum;
 import cn.hengzq.orange.common.enums.support.RequestMethodEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -47,7 +49,7 @@ public class AddOperationLogParam implements Serializable {
     private String stackTrace;
 
     @Schema(description = "操作用户ID")
-    private Long userId;
+    private String userId;
 
     @Schema(description = "操作用户名称")
     private String userName;

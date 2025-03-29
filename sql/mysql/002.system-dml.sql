@@ -5,16 +5,16 @@
 use orange;
 
 -- 默认部门ID
-SET @d_id := -100;
+SET @d_id := '-100';
 
 -- 默认用户ID
-SET @u_id := -100;
+SET @u_id := '-100';
 
 -- 默认租户ID
-SET @t_id := -100;
+SET @t_id := '-100';
 
 -- 默认角色ID
-SET @r_id := -100;
+SET @r_id := '-100';
 
 -- ----------------------------
 -- 预置部门数据
@@ -32,7 +32,7 @@ delete
 from sys_user
 where id = @u_id;
 
-INSERT INTO sys_user (id, tenant_id, nickname, email, gender, phone, username, password, created_by)
+INSERT INTO sys_user (id, tenant_id, name, email, gender, phone, login_account, login_password, created_by)
 VALUES (@u_id, @t_id, '系统管理员', 'hengzq@yeah.net', '1', '17629990001', 'admin',
         '$2a$18$6Ora//VZ//HxnI64lNWYXOZx4Qp47M9.vQG72jx7u4BwGGdQquLaG', @u_id);
 
@@ -44,7 +44,7 @@ from sys_role
 where id = @r_id;
 
 INSERT INTO sys_role (id, tenant_id, name, permission, sort, enabled, preset, remark, created_by)
-VALUES (@r_id, @t_id, '系统管理员', 'admin', 1, 0, 0, '系统管理员账号-拥有所有的权限', @u_id);
+VALUES (@r_id, @t_id, '系统超级管理员', 'super_admin', 1, 0, 0, '系统超级管理员-拥有所有的权限', @u_id);
 
 -- ----------------------------
 -- 用户角色绑定

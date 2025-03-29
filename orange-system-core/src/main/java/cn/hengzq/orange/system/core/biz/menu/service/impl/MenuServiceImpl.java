@@ -51,7 +51,7 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public List<MenuDetailVO> list(MenuListParam param) {
-        List<Long> menuIds = List.of();
+        List<String> menuIds = List.of();
         if (CollUtil.isNotEmpty(param.getRoleIds())) {
             List<RoleResourceRlEntity> resourceRlEntityList = roleResourceRlMapper.selectListByTypeAndRoleIds(ResourceTypeEnum.MENU, param.getRoleIds());
             menuIds = CollUtils.convertList(resourceRlEntityList, RoleResourceRlEntity::getResourceId);
@@ -79,12 +79,12 @@ public class MenuServiceImpl implements MenuService {
         if (CollUtil.isEmpty(menuVOS)) {
             return;
         }
-        List<Long> menuIds = CollUtils.convertList(menuVOS, MenuVO::getId);
+        List<String> menuIds = CollUtils.convertList(menuVOS, MenuVO::getId);
         List<ButtonVO> buttonVOList = buttonService.list(ButtonListParam.builder().menuIds(menuIds).build());
         if (CollUtil.isEmpty(buttonVOList)) {
             return;
         }
-        Map<Long, List<ButtonVO>> buttonMap = buttonVOList.stream().collect(Collectors.groupingBy(ButtonVO::getMenuId));
+        Map<String, List<ButtonVO>> buttonMap = buttonVOList.stream().collect(Collectors.groupingBy(ButtonVO::getMenuId));
         // 组装按钮
         menuVOS.forEach(item -> {
             if (buttonMap.containsKey(item.getId())) {
@@ -94,7 +94,7 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public Long add(AddMenuParam param) {
+    public String add(AddMenuParam param) {
         Assert.nonNull(param.getPermission(), MenuErrorCode.MENU_PERMISSION_CANNOT_NULL);
         MenuEntity entity = menuMapper.selectByPermission(param.getPermission());
         Assert.isNull(entity, MenuErrorCode.MENU_PERMISSION_CANNOT_REPEAT);
@@ -105,7 +105,7 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public Boolean updateById(Long id, UpdateMenuParam param) {
+    public Boolean updateById(String id, UpdateMenuParam param) {
         MenuEntity entity = menuMapper.selectById(id);
         Assert.nonNull(entity.getId(), GlobalErrorCodeConstant.GLOBAL_DATA_NOT_EXIST);
         if (StrUtil.isNotBlank(param.getPermission()) && !param.getPermission().equals(entity.getPermission())) {
@@ -118,7 +118,7 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public Boolean removeById(Long id) {
+    public Boolean removeById(String id) {
         MenuEntity entity = menuMapper.selectById(id);
         Assert.nonNull(entity, GlobalErrorCodeConstant.GLOBAL_DATA_NOT_EXIST);
         // 预置数据 不允许删除
@@ -139,7 +139,7 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public MenuVO getById(Long id) {
+    public MenuVO getById(String id) {
         return MenuConverter.INSTANCE.toVO(menuMapper.selectById(id));
     }
 }

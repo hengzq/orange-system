@@ -38,18 +38,18 @@ public class OperationLogServiceImpl implements OperationLogService, OperationLo
     private final UserService userService;
 
     @Override
-    public Long add(AddOperationLogParam param) {
+    public String add(AddOperationLogParam param) {
         OperationLogEntity entity = OperationLogConverter.INSTANCE.toEntity(param);
         return operationLogMapper.insertOne(entity);
     }
 
     @Override
-    public OperationLogVO getById(Long id) {
+    public OperationLogVO getById(String id) {
         OperationLogEntity entity = operationLogMapper.selectById(id);
         OperationLogVO vo = OperationLogConverter.INSTANCE.toVO(entity);
         Assert.nonNull(vo, GlobalErrorCodeConstant.GLOBAL_PARAMETER_ID_IS_INVALID);
 
-        Map<Long, String> userNameMap = userService.getNameMapByIds(Set.of(vo.getUserId()));
+        Map<String, String> userNameMap = userService.getNameMapByIds(Set.of(vo.getUserId()));
         vo.setUserName(userNameMap.get(vo.getUserId()));
         return vo;
     }
@@ -71,7 +71,7 @@ public class OperationLogServiceImpl implements OperationLogService, OperationLo
             return pageDTO;
         }
         List<OperationLogVO> records = pageDTO.getRecords();
-        Map<Long, String> userNameMap = userService.getNameMapByIds(CollUtils.convertSet(records, OperationLogVO::getUserId));
+        Map<String, String> userNameMap = userService.getNameMapByIds(CollUtils.convertSet(records, OperationLogVO::getUserId));
         records.forEach(record -> {
             record.setUserName(userNameMap.get(record.getUserId()));
         });

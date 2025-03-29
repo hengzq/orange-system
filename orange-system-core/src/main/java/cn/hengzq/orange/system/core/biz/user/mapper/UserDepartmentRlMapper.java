@@ -13,11 +13,11 @@ import java.util.List;
 @Repository
 public interface UserDepartmentRlMapper extends CommonMapper<UserDepartmentRlEntity> {
 
-    default List<UserDepartmentRlEntity> selectListByUserId(Long userId) {
+    default List<UserDepartmentRlEntity> selectListByUserId(String userId) {
         return selectList(CommonWrappers.<UserDepartmentRlEntity>lambdaQuery().eq(UserDepartmentRlEntity::getUserId, userId));
     }
 
-    default void deleteByUserId(Long userId) {
+    default void deleteByUserId(String userId) {
         delete(CommonWrappers.<UserDepartmentRlEntity>lambdaQuery().eq(UserDepartmentRlEntity::getUserId, userId));
     }
 }

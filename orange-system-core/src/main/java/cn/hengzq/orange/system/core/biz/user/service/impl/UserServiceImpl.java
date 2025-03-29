@@ -50,13 +50,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public Long add(AddUserParam param) {
+    public String add(AddUserParam param) {
         UserEntity entity = UserConverter.INSTANCE.toEntity(param);
         if (StrUtil.isNotBlank(param.getLoginAccount())) {
             String password = StrUtil.isBlank(param.getLoginPassword()) ? SecurityConstant.DEFAULT_USER_PASSWORD : param.getLoginPassword();
             entity.setLoginPassword(passwordEncoder.encode(password));
         }
-        Long userId = userMapper.insertOne(entity);
+        String userId = userMapper.insertOne(entity);
         if (CollUtil.isNotEmpty(param.getDepartmentIds())) {
             userDepartmentRlService.addUserDepartmentRelation(userId, param.getDepartmentIds());
         }
@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public Boolean updateById(Long id, UpdateUserParam param) {
+    public Boolean updateById(String id, UpdateUserParam param) {
         UserEntity entity = userMapper.selectById(id);
         Assert.nonNull(entity, UserErrorCode.GLOBAL_DATA_NOT_EXIST);
         entity = UserConverter.INSTANCE.toUpdateEntity(entity, param);
@@ -78,7 +78,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Boolean updatePassword(UpdatePasswordParam param) {
-        Long userId = Objects.isNull(param.getUserId()) ? GlobalContextHelper.getUserId() : param.getUserId();
+        String userId = Objects.isNull(param.getUserId()) ? GlobalContextHelper.getUserId() : param.getUserId();
         UserEntity entity = userMapper.selectById(userId);
         Assert.nonNull(entity, GlobalErrorCodeConstant.GLOBAL_DATA_NOT_EXIST);
         boolean matches = passwordEncoder.matches(param.getOldPassword(), entity.getLoginPassword());
@@ -100,7 +100,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDetailVO getById(Long userId, UserDetailQueryParam param) {
+    public UserDetailVO getById(String userId, UserDetailQueryParam param) {
         UserEntity entity = userMapper.selectById(userId);
         UserDetailVO userDetailVO = BeanUtil.copyProperties(entity, UserDetailVO.class);
         Assert.nonNull(userDetailVO, GlobalErrorCodeConstant.GLOBAL_PARAMETER_ID_IS_INVALID);
@@ -140,7 +140,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Map<Long, String> getNameMapByIds(Set<Long> ids) {
+    public Map<String, String> getNameMapByIds(Set<String> ids) {
         if (CollUtil.isEmpty(ids)) {
             return Map.of();
         }
@@ -152,7 +152,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Boolean removeById(Long id) {
+    public Boolean removeById(String id) {
         return userMapper.deleteOneById(id);
     }
 

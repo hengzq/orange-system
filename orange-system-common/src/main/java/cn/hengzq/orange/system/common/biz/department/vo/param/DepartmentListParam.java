@@ -19,6 +19,6 @@ public class DepartmentListParam implements Serializable {
     private String nameLike;
 
     @Schema(description = "父级ID")
-    private Long parentId;
+    private String parentId;
 
 }

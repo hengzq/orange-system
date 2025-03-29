@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
 public class OperationLogEntity extends BaseTenantEntity {
 
     @TableId(type = IdType.ASSIGN_ID)
-    private Long id;
+    private String id;
 
     @TableField("request_id")
     private String requestId;
@@ -58,7 +58,7 @@ public class OperationLogEntity extends BaseTenantEntity {
     private String stackTrace;
 
     @TableField("user_id")
-    private Long userId;
+    private String userId;
 
     @TableField("user_ip")
     private String userIp;

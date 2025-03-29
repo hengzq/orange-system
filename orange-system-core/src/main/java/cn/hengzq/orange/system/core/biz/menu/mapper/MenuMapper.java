@@ -17,7 +17,7 @@ public interface MenuMapper extends CommonMapper<MenuEntity> {
     /**
      * 根据父节点id查询
      */
-    default List<MenuEntity> selectListByParentId(Long parentId) {
+    default List<MenuEntity> selectListByParentId(String parentId) {
         return this.selectList(Wrappers.<MenuEntity>lambdaQuery().eq(MenuEntity::getParentId, parentId));
     }
 

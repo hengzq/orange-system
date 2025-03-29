@@ -27,7 +27,7 @@ public class MenuListParam implements Serializable {
     private String nameLike;
 
     @Schema(description = "角色ID")
-    private List<Long> roleIds;
+    private List<String> roleIds;
 
     @Schema(description = "是否返回菜单绑定的按钮.true:是,false:否(默认)")
     private boolean showButton;

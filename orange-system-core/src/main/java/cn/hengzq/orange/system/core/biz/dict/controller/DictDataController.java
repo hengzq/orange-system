@@ -33,26 +33,26 @@ public class DictDataController {
 
     @Operation(summary = "新建", operationId = "system:dict-data:add")
     @PostMapping
-    public Result<Long> add(@Validated @RequestBody AddDictDataParam param) {
+    public Result<String> add(@Validated @RequestBody AddDictDataParam param) {
         return ResultWrapper.ok(dictDataService.add(param));
     }
 
     @Operation(summary = "根据ID删除", operationId = "system:dict-data:delete")
     @DeleteMapping("/{id}")
-    public Result<Boolean> deleteById(@Parameter(description = "主键ID") @PathVariable("id") Long id) {
+    public Result<Boolean> deleteById(@Parameter(description = "主键ID") @PathVariable("id") String id) {
         return ResultWrapper.ok(dictDataService.removeById(id));
     }
 
 
     @Operation(summary = "根据ID修改", operationId = "system:dict-data:update")
     @PutMapping("/{id}")
-    public Result<Boolean> update(@Parameter(description = "主键ID") @PathVariable("id") Long id, @RequestBody UpdateDictDataParam param) {
+    public Result<Boolean> update(@Parameter(description = "主键ID") @PathVariable("id") String id, @RequestBody UpdateDictDataParam param) {
         return ResultWrapper.ok(dictDataService.updateById(id, param));
     }
 
     @Operation(summary = "根据ID查询详情", operationId = "system:dict-data:get")
     @GetMapping("/{id}")
-    public Result<DictDataVO> getById(@PathVariable("id") Long id) {
+    public Result<DictDataVO> getById(@PathVariable("id") String id) {
         return ResultWrapper.ok(dictDataService.getById(id));
     }
 

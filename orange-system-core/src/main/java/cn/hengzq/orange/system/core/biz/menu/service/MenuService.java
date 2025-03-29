@@ -24,18 +24,18 @@ public interface MenuService {
     /**
      * 新增菜单
      */
-    Long add(AddMenuParam param);
+    String add(AddMenuParam param);
 
     /**
      * 根据ID更新
      */
-    Boolean updateById(Long id, UpdateMenuParam param);
+    Boolean updateById(String id, UpdateMenuParam param);
 
     /**
      * 根据ID删除数据
      */
-    Boolean removeById(Long id);
+    Boolean removeById(String id);
 
-    MenuVO getById(Long id);
+    MenuVO getById(String id);
 
 }

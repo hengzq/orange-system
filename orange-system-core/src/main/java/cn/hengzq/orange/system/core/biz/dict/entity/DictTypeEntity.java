@@ -21,7 +21,7 @@ public class DictTypeEntity extends BaseTenantEntity {
      * id
      */
     @TableId(type = IdType.ASSIGN_ID)
-    private Long id;
+    private String id;
 
     /**
      * 字典名称

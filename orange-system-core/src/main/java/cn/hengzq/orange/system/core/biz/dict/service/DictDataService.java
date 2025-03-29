@@ -17,15 +17,15 @@ import java.util.List;
  */
 public interface DictDataService {
 
-    Long add(AddDictDataParam param);
+    String add(AddDictDataParam param);
 
-    Boolean removeById(Long id);
+    Boolean removeById(String id);
 
     PageDTO<DictDataVO> page(DictDataPageParam param);
 
-    DictDataVO getById(Long id);
+    DictDataVO getById(String id);
 
     List<DictDataVO> list(DictDataListParam param);
 
-    Boolean updateById(Long id, UpdateDictDataParam param);
+    Boolean updateById(String id, UpdateDictDataParam param);
 }

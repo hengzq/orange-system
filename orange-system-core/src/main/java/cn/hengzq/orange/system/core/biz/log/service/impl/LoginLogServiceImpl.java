@@ -38,7 +38,7 @@ public class LoginLogServiceImpl implements LoginLogService, LoginLogApi {
     private final UserService userService;
 
     @Override
-    public Long add(AddLoginLogParam param) {
+    public String add(AddLoginLogParam param) {
         LoginLogEntity entity = LoginLogConverter.INSTANCE.toEntity(param);
         return loginLogMapper.insertOne(entity);
     }
@@ -55,7 +55,7 @@ public class LoginLogServiceImpl implements LoginLogService, LoginLogApi {
             return pageDTO;
         }
         List<LoginLogVO> records = pageDTO.getRecords();
-        Map<Long, String> userNameMap = userService.getNameMapByIds(CollUtils.convertSet(records, LoginLogVO::getUserId));
+        Map<String, String> userNameMap = userService.getNameMapByIds(CollUtils.convertSet(records, LoginLogVO::getUserId));
         records.forEach(record -> {
             record.setUserName(userNameMap.get(record.getUserId()));
         });
@@ -63,13 +63,13 @@ public class LoginLogServiceImpl implements LoginLogService, LoginLogApi {
     }
 
     @Override
-    public LoginLogVO getById(Long id) {
+    public LoginLogVO getById(String id) {
         LoginLogEntity entity = loginLogMapper.selectById(id);
         LoginLogVO vo = LoginLogConverter.INSTANCE.toVO(entity);
         Assert.nonNull(vo, GlobalErrorCodeConstant.GLOBAL_PARAMETER_ID_IS_INVALID);
 
         if (Objects.nonNull(vo.getUserId())) {
-            Map<Long, String> userNameMap = userService.getNameMapByIds(Set.of(vo.getUserId()));
+            Map<String, String> userNameMap = userService.getNameMapByIds(Set.of(vo.getUserId()));
             vo.setUserName(userNameMap.get(vo.getUserId()));
         }
         return vo;

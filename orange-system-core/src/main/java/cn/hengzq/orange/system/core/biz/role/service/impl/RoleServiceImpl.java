@@ -44,7 +44,7 @@ public class RoleServiceImpl implements RoleService {
     private final ButtonService buttonService;
 
     @Override
-    public Long add(AddRoleParam param) {
+    public String add(AddRoleParam param) {
         Assert.nonNull(param.getPermission(), RoleErrorCode.ROLE_PERMISSION_CANNOT_NULL);
         RoleEntity entity = roleMapper.selectByPermission(param.getPermission());
         Assert.isNull(entity, RoleErrorCode.ROLE_PERMISSION_CANNOT_REPEAT);
@@ -54,7 +54,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public Boolean updateById(Long id, UpdateRoleParam param) {
+    public Boolean updateById(String id, UpdateRoleParam param) {
         RoleEntity entity = roleMapper.selectById(id);
         Assert.nonNull(entity.getId(), GlobalErrorCodeConstant.GLOBAL_DATA_NOT_EXIST);
         if (StrUtil.isNotBlank(param.getPermission()) && !param.getPermission().equals(entity.getPermission())) {
@@ -77,18 +77,18 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public List<RoleVO> listByUserId(Long userId) {
+    public List<RoleVO> listByUserId(String userId) {
         List<RoleEntity> entityList = roleMapper.selectListByUserId(userId);
         return RoleConverter.INSTANCE.toListVO(entityList);
     }
 
     @Override
-    public Boolean removeById(Long id) {
+    public Boolean removeById(String id) {
         return roleMapper.deleteOneById(id);
     }
 
     @Override
-    public RoleDetailVO getById(Long id, RoleDetailQueryParam param) {
+    public RoleDetailVO getById(String id, RoleDetailQueryParam param) {
         RoleDetailVO detailVO = BeanUtil.copyProperties(roleMapper.selectById(id), RoleDetailVO.class);
         if (Objects.isNull(detailVO)) {
             throw new ServiceException(GlobalErrorCodeConstant.GLOBAL_PARAMETER_ID_IS_INVALID);

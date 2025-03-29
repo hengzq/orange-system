@@ -17,11 +17,11 @@ import java.util.List;
 public class ButtonListParam implements Serializable {
 
     @Schema(description = "菜单ID")
-    private Long menuId;
+    private String menuId;
 
     @Schema(description = "角色 Ids")
-    private List<Long> roleIds;
+    private List<String> roleIds;
 
     @Schema(description = "菜单IDS")
-    private List<Long> menuIds;
+    private List<String> menuIds;
 }

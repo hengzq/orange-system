@@ -11,5 +11,5 @@ import lombok.EqualsAndHashCode;
 public class ButtonPageParam extends PageParam {
 
     @Schema(description = "菜单ID")
-    private Long menuId;
+    private String menuId;
 }

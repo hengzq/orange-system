@@ -17,10 +17,10 @@ import lombok.EqualsAndHashCode;
 public class ButtonEntity extends BaseTenantEntity {
 
     @TableId(type = IdType.ASSIGN_ID)
-    private Long id;
+    private String id;
 
     @TableField("menu_id")
-    private Long menuId;
+    private String menuId;
 
     @TableField("name")
     private String name;

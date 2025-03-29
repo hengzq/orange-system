@@ -15,7 +15,7 @@ public class AddButtonParam implements Serializable {
 
     @NotNull(message = "菜单ID不能为空.")
     @Schema(description = "菜单ID")
-    private Long menuId;
+    private String menuId;
 
     @NotNull(message = "菜单名称不能为空.")
     @Schema(description = "菜单名称")

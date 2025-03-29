@@ -14,7 +14,7 @@ import java.util.Objects;
 @Repository
 public interface DepartmentMapper extends CommonMapper<DepartmentEntity> {
 
-    default List<DepartmentEntity> selectByParentId(Long parentId) {
+    default List<DepartmentEntity> selectByParentId(String parentId) {
         if (Objects.isNull(parentId)) {
             return List.of();
         }

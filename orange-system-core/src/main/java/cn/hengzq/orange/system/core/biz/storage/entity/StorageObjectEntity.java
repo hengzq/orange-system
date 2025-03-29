@@ -19,21 +19,21 @@ import lombok.EqualsAndHashCode;
 public class StorageObjectEntity extends BaseTenantEntity {
 
     @TableId(type = IdType.ASSIGN_ID)
-    private Long id;
+    private String id;
 
     @TableField(value = "mode", typeHandler = EnumCodeTypeHandler.class)
     private StorageMode mode;
 
-    @TableField("original_name")
-    private String originalName;
-
     @TableField("file_name")
     private String fileName;
 
-    @TableField("type")
-    private String type;
+    @TableField("file_path")
+    private String filePath;
 
-    @TableField("size")
-    private Long size;
+    @TableField("file_type")
+    private String fileType;
+
+    @TableField("file_size")
+    private Long fileSize;
 
 }

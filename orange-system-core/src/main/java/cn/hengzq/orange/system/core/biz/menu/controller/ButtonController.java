@@ -30,25 +30,25 @@ public class ButtonController {
 
     @Operation(summary = "新建", operationId = "system:button:add")
     @PostMapping
-    public Result<Long> add(@RequestBody @Validated AddButtonParam param) {
+    public Result<String> add(@RequestBody @Validated AddButtonParam param) {
         return ResultWrapper.ok(buttonService.add(param));
     }
 
     @Operation(summary = "根据ID删除", operationId = "system:button:delete")
     @DeleteMapping("/{id}")
-    public Result<Boolean> removeById(@PathVariable("id") Long id) {
+    public Result<Boolean> removeById(@PathVariable("id") String id) {
         return ResultWrapper.ok(buttonService.removeById(id));
     }
 
     @Operation(summary = "根据ID更新", operationId = "system:button:update")
     @PutMapping("/{id}")
-    public Result<Boolean> updateById(@PathVariable("id") Long id, @RequestBody @Validated UpdateButtonParam param) {
+    public Result<Boolean> updateById(@PathVariable("id") String id, @RequestBody @Validated UpdateButtonParam param) {
         return ResultWrapper.ok(buttonService.updateById(id, param));
     }
 
     @Operation(summary = "根据ID查询", operationId = "system:button:get")
     @GetMapping("/{id}")
-    public Result<ButtonVO> getById(@PathVariable("id") Long id) {
+    public Result<ButtonVO> getById(@PathVariable("id") String id) {
         return ResultWrapper.ok(buttonService.getById(id));
     }
 

@@ -25,7 +25,7 @@ public class UserDepartmentRlServiceImpl implements UserDepartmentRlService {
     private final UserDepartmentRlMapper userDepartmentRlMapper;
 
     @Override
-    public void addUserDepartmentRelation(Long userId, List<Long> departmentIds) {
+    public void addUserDepartmentRelation(String userId, List<String> departmentIds) {
         Assert.nonNull(userId, UserErrorCode.USER_ID_CANNOT_NULL);
         Assert.notEmpty(departmentIds, DepartmentErrorCode.DEPARTMENT_ID_CANNOT_NULL);
         List<UserDepartmentRlEntity> addList = departmentIds.stream().map(item -> new UserDepartmentRlEntity(userId, item)).toList();
@@ -33,13 +33,13 @@ public class UserDepartmentRlServiceImpl implements UserDepartmentRlService {
     }
 
     @Override
-    public List<Long> listDepartmentIdsByUserId(Long userId) {
+    public List<String> listDepartmentIdsByUserId(String userId) {
         List<UserDepartmentRlEntity> entities = userDepartmentRlMapper.selectListByUserId(userId);
         return CollUtil.isEmpty(entities) ? List.of() : CollUtils.convertList(entities, UserDepartmentRlEntity::getDepartmentId);
     }
 
     @Override
-    public void removeByUserId(Long userId) {
+    public void removeByUserId(String userId) {
         userDepartmentRlMapper.deleteByUserId(userId);
     }
 }

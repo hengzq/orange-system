@@ -13,7 +13,7 @@ import lombok.EqualsAndHashCode;
 public class DictTypeVO extends BaseTenantDTO {
 
     @Schema(description = "主键", accessMode = Schema.AccessMode.READ_ONLY)
-    private Long id;
+    private String id;
 
     @Schema(description = "字典名称")
     private String name;

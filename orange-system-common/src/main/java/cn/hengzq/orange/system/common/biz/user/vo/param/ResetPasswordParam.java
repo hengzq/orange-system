@@ -17,7 +17,7 @@ public class ResetPasswordParam implements Serializable {
 
     @Schema(description = "用户ID")
     @NotNull(message = "用户ID,用户ID为空")
-    private Long userId;
+    private String userId;
 
     @Schema(description = "新密码", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotBlank(message = "新密码不能为空.")

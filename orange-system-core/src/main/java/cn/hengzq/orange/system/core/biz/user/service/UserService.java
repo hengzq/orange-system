@@ -15,10 +15,10 @@ import java.util.Set;
 public interface UserService {
 
 
-    Long add(AddUserParam param);
+    String add(AddUserParam param);
 
 
-    Boolean updateById(Long id, UpdateUserParam param);
+    Boolean updateById(String id, UpdateUserParam param);
 
 
     /**
@@ -34,7 +34,7 @@ public interface UserService {
     /**
      * 根据用户ID查询用户
      */
-    UserDetailVO getById(Long userId, UserDetailQueryParam param);
+    UserDetailVO getById(String userId, UserDetailQueryParam param);
 
     /**
      * 根据登录账号查询用户
@@ -49,7 +49,7 @@ public interface UserService {
 
     List<UserVO> list(UserListParam query);
 
-    Map<Long, String> getNameMapByIds(Set<Long> ids);
+    Map<String, String> getNameMapByIds(Set<String> ids);
 
-    Boolean removeById(Long id);
+    Boolean removeById(String id);
 }

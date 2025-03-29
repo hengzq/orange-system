@@ -18,9 +18,9 @@ public interface StorageObjectService {
 
     List<StorageObjectVO> batchUpload(List<StorageObjectUploadParam> params);
 
-    StorageByteObjectVO getByteArrayById(Long id);
+    StorageByteObjectVO getByteArrayById(String id);
 
-    StorageObjectVO getById(Long id);
+    StorageObjectVO getById(String id);
 
     StorageByteObjectVO getByteArrayByIFileName(String fileName);
 }

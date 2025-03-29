@@ -16,7 +16,7 @@ import lombok.EqualsAndHashCode;
 public class DictDataVO extends BaseTenantDTO {
 
     @Schema(description = "主键", accessMode = Schema.AccessMode.READ_ONLY)
-    private Long id;
+    private String id;
 
     @NotBlank(message = "字典类型不能为空")
     @Schema(description = "字典类型")

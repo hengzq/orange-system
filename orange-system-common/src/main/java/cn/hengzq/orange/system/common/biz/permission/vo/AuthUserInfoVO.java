@@ -32,10 +32,10 @@ public class AuthUserInfoVO extends UserVO {
     @Data
     public static class Menu {
         @Schema(description = "菜单ID", accessMode = Schema.AccessMode.READ_ONLY)
-        private Long id;
+        private String id;
 
         @Schema(description = "父级别ID")
-        private Long parentId;
+        private String parentId;
 
         @Schema(description = "菜单名称")
         private String name;

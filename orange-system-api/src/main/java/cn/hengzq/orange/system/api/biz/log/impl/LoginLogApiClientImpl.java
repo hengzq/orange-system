@@ -7,7 +7,7 @@ public class LoginLogApiClientImpl implements LoginLogApi {
 
 
     @Override
-    public Long add(AddLoginLogParam param) {
+    public String add(AddLoginLogParam param) {
         return null;
     }
 }

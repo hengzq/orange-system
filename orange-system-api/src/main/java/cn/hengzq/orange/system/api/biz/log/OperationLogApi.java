@@ -4,5 +4,5 @@ import cn.hengzq.orange.system.common.biz.log.vo.operation.param.AddOperationLog
 
 public interface OperationLogApi {
 
-    Long add(AddOperationLogParam param);
+    String add(AddOperationLogParam param);
 }

@@ -22,13 +22,13 @@ public class MenuEntity extends BaseTenantEntity {
      * id
      */
     @TableId(type = IdType.ASSIGN_ID)
-    private Long id;
+    private String id;
 
     /**
      * 父级别ID
      */
     @TableField("parent_id")
-    private Long parentId;
+    private String parentId;
 
     /**
      * 菜单名称

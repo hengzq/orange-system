@@ -15,7 +15,7 @@ import java.util.Objects;
 @Repository
 public interface UserRoleRlMapper extends CommonMapper<UserRoleRlEntity> {
 
-    default int deleteByUserId(Long userId) {
+    default int deleteByUserId(String userId) {
         if (Objects.isNull(userId)) {
             throw new ServiceException(GlobalErrorCodeConstant.GLOBAL_USER_ID_CANNOT_NULL);
         }

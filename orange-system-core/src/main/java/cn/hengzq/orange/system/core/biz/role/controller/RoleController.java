@@ -31,25 +31,25 @@ public class RoleController {
 
     @Operation(summary = "新建", operationId = "system:role:add")
     @PostMapping
-    public Result<Long> add(@RequestBody @Validated AddRoleParam request) {
+    public Result<String> add(@RequestBody @Validated AddRoleParam request) {
         return ResultWrapper.ok(roleService.add(request));
     }
 
     @Operation(summary = "根据ID删除", operationId = "system:role:delete")
     @DeleteMapping("/{id}")
-    public Result<Boolean> removeById(@PathVariable("id") Long id) {
+    public Result<Boolean> removeById(@PathVariable("id") String id) {
         return ResultWrapper.ok(roleService.removeById(id));
     }
 
     @Operation(summary = "根据ID更新", operationId = "system:role:update")
     @PutMapping("/{id}")
-    public Result<Boolean> updateById(@PathVariable("id") Long id, @RequestBody @Validated UpdateRoleParam request) {
+    public Result<Boolean> updateById(@PathVariable("id") String id, @RequestBody @Validated UpdateRoleParam request) {
         return ResultWrapper.ok(roleService.updateById(id, request));
     }
 
     @Operation(summary = "根据ID查询", operationId = "system:role:get")
     @GetMapping("/{id}")
-    public Result<RoleDetailVO> getById(@PathVariable("id") Long id, @ParameterObject RoleDetailQueryParam param) {
+    public Result<RoleDetailVO> getById(@PathVariable("id") String id, @ParameterObject RoleDetailQueryParam param) {
         return ResultWrapper.ok(roleService.getById(id, param));
     }
 

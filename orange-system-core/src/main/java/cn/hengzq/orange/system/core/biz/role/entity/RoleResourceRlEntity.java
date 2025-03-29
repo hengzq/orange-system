@@ -19,20 +19,20 @@ import lombok.NoArgsConstructor;
 @TableName("sys_role_resource_rl")
 public class RoleResourceRlEntity extends BaseTenantEntity {
 
-    public RoleResourceRlEntity(Long roleId, Long resourceId, ResourceTypeEnum resourceType) {
+    public RoleResourceRlEntity(String roleId, String resourceId, ResourceTypeEnum resourceType) {
         this.roleId = roleId;
         this.resourceId = resourceId;
         this.resourceType = resourceType;
     }
 
     @TableId(type = IdType.ASSIGN_ID)
-    private Long id;
+    private String id;
 
     @TableField("role_id")
-    private Long roleId;
+    private String roleId;
 
     @TableField("resource_id")
-    private Long resourceId;
+    private String resourceId;
 
     @TableField("resource_type")
     private ResourceTypeEnum resourceType;

@@ -14,10 +14,10 @@ import lombok.EqualsAndHashCode;
 public class DepartmentVO extends BaseTenantDTO {
 
     @Schema(description = "主键", accessMode = Schema.AccessMode.READ_ONLY)
-    private Long id;
+    private String id;
 
     @Schema(description = "父级ID")
-    private Long parentId;
+    private String parentId;
 
     @Schema(description = "部门名称")
     private String name;

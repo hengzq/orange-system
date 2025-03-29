@@ -15,13 +15,13 @@ import java.util.List;
  */
 public interface DepartmentService {
 
-    Long add(AddDepartmentParam request);
+    String add(AddDepartmentParam request);
 
-    Boolean removeById(Long id);
+    Boolean removeById(String id);
 
-    Boolean updateById(Long id, UpdateDepartmentParam request);
+    Boolean updateById(String id, UpdateDepartmentParam request);
 
-    DepartmentVO getById(Long id);
+    DepartmentVO getById(String id);
 
     List<DepartmentVO> list(DepartmentListParam query);
 

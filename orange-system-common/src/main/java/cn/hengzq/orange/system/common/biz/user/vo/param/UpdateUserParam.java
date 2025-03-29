@@ -27,5 +27,5 @@ public class UpdateUserParam implements Serializable {
     private String phone;
 
     @Schema(description = "用户关联的部门", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-    private List<Long> departmentIds;
+    private List<String> departmentIds;
 }

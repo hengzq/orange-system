@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 public class OperationLogApiClientImpl implements OperationLogApi {
 
     @Override
-    public Long add(AddOperationLogParam param) {
+    public String add(AddOperationLogParam param) {
         try {
             OperationLogClient operationLogClient = SystemRestClient.httpServiceProxyFactory().createClient(OperationLogClient.class);
             return operationLogClient.add(param).getData();

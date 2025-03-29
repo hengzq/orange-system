@@ -29,7 +29,7 @@ public class LoginLogController {
 
     @Operation(summary = "新建", operationId = "system-log:login:add")
     @PostMapping
-    public Result<Long> add(@RequestBody @Validated AddLoginLogParam param) {
+    public Result<String> add(@RequestBody @Validated AddLoginLogParam param) {
         return ResultWrapper.ok(loginLogService.add(param));
     }
 
@@ -43,7 +43,7 @@ public class LoginLogController {
 
     @Operation(summary = "根据ID查询详情", operationId = "system:record:login:get")
     @GetMapping("/{id}")
-    public Result<LoginLogVO> getById(@PathVariable("id") Long id) {
+    public Result<LoginLogVO> getById(@PathVariable("id") String id) {
         return ResultWrapper.ok(loginLogService.getById(id));
     }
 

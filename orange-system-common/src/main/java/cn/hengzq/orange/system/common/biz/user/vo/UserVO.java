@@ -15,7 +15,7 @@ import lombok.EqualsAndHashCode;
 public class UserVO extends BaseTenantDTO {
 
     @Schema(description = "主键", accessMode = Schema.AccessMode.READ_ONLY)
-    private Long id;
+    private String id;
 
     @Schema(description = "用户名称")
     private String name;

@@ -31,25 +31,25 @@ public class MenuController {
 
     @Operation(summary = "新建", operationId = "system:menu:add")
     @PostMapping
-    public Result<Long> add(@RequestBody @Validated AddMenuParam param) {
+    public Result<String> add(@RequestBody @Validated AddMenuParam param) {
         return ResultWrapper.ok(menuService.add(param));
     }
 
     @Operation(summary = "根据ID删除", operationId = "system:menu:delete")
     @DeleteMapping("/{id}")
-    public Result<Boolean> removeById(@PathVariable("id") Long id) {
+    public Result<Boolean> removeById(@PathVariable("id") String id) {
         return ResultWrapper.ok(menuService.removeById(id));
     }
 
     @Operation(summary = "根据ID更新", operationId = "system:menu:update")
     @PutMapping("/{id}")
-    public Result<Boolean> updateById(@PathVariable("id") Long id, @RequestBody @Validated UpdateMenuParam param) {
+    public Result<Boolean> updateById(@PathVariable("id") String id, @RequestBody @Validated UpdateMenuParam param) {
         return ResultWrapper.ok(menuService.updateById(id, param));
     }
 
     @Operation(summary = "根据ID查询", operationId = "system:menu:get")
     @GetMapping("/{id}")
-    public Result<MenuVO> getById(@PathVariable("id") Long id) {
+    public Result<MenuVO> getById(@PathVariable("id") String id) {
         return ResultWrapper.ok(menuService.getById(id));
     }
 

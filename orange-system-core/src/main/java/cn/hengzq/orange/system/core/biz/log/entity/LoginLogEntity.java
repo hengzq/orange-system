@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
 public class LoginLogEntity extends BaseTenantEntity {
 
     @TableId(type = IdType.ASSIGN_ID)
-    private Long id;
+    private String id;
 
     @TableField("request_id")
     private String requestId;
@@ -36,7 +36,7 @@ public class LoginLogEntity extends BaseTenantEntity {
     private LoginTypeEnum type;
 
     @TableField("user_id")
-    private Long userId;
+    private String userId;
 
     @TableField("user_ip")
     private String userIp;

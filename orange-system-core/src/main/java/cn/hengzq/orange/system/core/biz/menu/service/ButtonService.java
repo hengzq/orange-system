@@ -16,13 +16,13 @@ public interface ButtonService {
 
     PageDTO<ButtonVO> page(ButtonPageParam param);
 
-    Long add(AddButtonParam param);
+    String add(AddButtonParam param);
 
-    Boolean updateById(Long id, UpdateButtonParam param);
+    Boolean updateById(String id, UpdateButtonParam param);
 
     List<ButtonVO> list(ButtonListParam param);
 
-    Boolean removeById(Long id);
+    Boolean removeById(String id);
 
-    ButtonVO getById(Long id);
+    ButtonVO getById(String id);
 }

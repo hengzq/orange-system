@@ -15,7 +15,7 @@ import java.util.List;
 @Repository
 public interface RoleMapper extends CommonMapper<RoleEntity> {
 
-    List<RoleEntity> selectListByUserId(Long userId);
+    List<RoleEntity> selectListByUserId(String userId);
 
     default RoleEntity selectByPermission(String permission) {
         if (StrUtil.isBlank(permission)) {

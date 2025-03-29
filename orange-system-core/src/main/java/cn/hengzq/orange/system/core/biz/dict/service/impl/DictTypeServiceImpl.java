@@ -37,7 +37,7 @@ public class DictTypeServiceImpl implements DictTypeService {
     private final DictDataMapper dictDataMapper;
 
     @Override
-    public Long add(AddDictTypeParam param) {
+    public String add(AddDictTypeParam param) {
         DictTypeEntity type = dictTypeMapper.selectByType(param.getDictType());
         Assert.isNull(type, SystemDictTypeErrorCode.DICT_TYPE_TYPE_ALREADY_EXIST);
         DictTypeEntity entity = DictTypeConverter.INSTANCE.toEntity(param);
@@ -46,7 +46,7 @@ public class DictTypeServiceImpl implements DictTypeService {
     }
 
     @Override
-    public Boolean removeById(Long id) {
+    public Boolean removeById(String id) {
         DictTypeEntity entity = dictTypeMapper.selectById(id);
         Assert.nonNull(entity, SystemDictTypeErrorCode.GLOBAL_DATA_NOT_EXIST);
         List<DictDataEntity> entityList = dictDataMapper.selectListByType(entity.getDictType());
@@ -55,7 +55,7 @@ public class DictTypeServiceImpl implements DictTypeService {
     }
 
     @Override
-    public Boolean updateById(Long id, UpdateDictTypeParam request) {
+    public Boolean updateById(String id, UpdateDictTypeParam request) {
         DictTypeEntity entity = dictTypeMapper.selectById(id);
         Assert.nonNull(entity, GlobalErrorCodeConstant.GLOBAL_DATA_NOT_EXIST);
         entity = DictTypeConverter.INSTANCE.toUpdateEntity(entity, request);
@@ -63,7 +63,7 @@ public class DictTypeServiceImpl implements DictTypeService {
     }
 
     @Override
-    public DictTypeVO getById(Long id) {
+    public DictTypeVO getById(String id) {
         return DictTypeConverter.INSTANCE.toVO(dictTypeMapper.selectById(id));
     }
 

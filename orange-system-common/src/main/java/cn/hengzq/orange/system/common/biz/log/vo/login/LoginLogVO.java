@@ -16,10 +16,10 @@ import java.time.LocalDateTime;
 public class LoginLogVO implements Serializable {
 
     @Schema(description = "主键", accessMode = Schema.AccessMode.READ_ONLY)
-    private Long id;
+    private String id;
 
     @Schema(description = "租户id")
-    private Long tenantId;
+    private String tenantId;
 
     @Schema(description = "请求ID")
     private String requestId;
@@ -31,7 +31,7 @@ public class LoginLogVO implements Serializable {
     private LoginTypeEnum type;
 
     @Schema(description = "操作用户ID")
-    private Long userId;
+    private String userId;
 
     @Schema(description = "操作用户名称")
     private String userName;

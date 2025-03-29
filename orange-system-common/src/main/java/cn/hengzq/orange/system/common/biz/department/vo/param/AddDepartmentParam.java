@@ -16,7 +16,7 @@ import java.io.Serializable;
 public class AddDepartmentParam implements Serializable {
 
     @Schema(description = "父级ID,默认:-1（为顶级部门）")
-    private Long parentId;
+    private String parentId;
 
     @NotBlank(message = DepartmentErrorCode.DEPARTMENT_NAME_CANNOT_NULL_CODE)
     @Schema(description = "部门名称")

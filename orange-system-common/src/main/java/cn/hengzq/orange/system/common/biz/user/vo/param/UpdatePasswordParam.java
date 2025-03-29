@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class UpdatePasswordParam implements Serializable {
 
     @Schema(description = "用户ID,用户ID为空，修改当前用户密码")
-    private Long userId;
+    private String userId;
 
     @Schema(description = "旧密码", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "旧密码不能为空.")

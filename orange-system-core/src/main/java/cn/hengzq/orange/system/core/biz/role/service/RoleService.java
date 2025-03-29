@@ -12,17 +12,17 @@ import java.util.List;
  */
 public interface RoleService {
 
-    Long add(AddRoleParam param);
+    String add(AddRoleParam param);
 
-    Boolean updateById(Long id, UpdateRoleParam param);
+    Boolean updateById(String id, UpdateRoleParam param);
 
     PageDTO<RoleVO> page(RolePageParam query);
 
-    List<RoleVO> listByUserId(Long userId);
+    List<RoleVO> listByUserId(String userId);
 
-    Boolean removeById(Long id);
+    Boolean removeById(String id);
 
-    RoleDetailVO getById(Long id, RoleDetailQueryParam param);
+    RoleDetailVO getById(String id, RoleDetailQueryParam param);
 
     List<RoleVO> list(RoleListParam param);
 

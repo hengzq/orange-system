@@ -60,7 +60,7 @@ public class StorageObjectController {
 
     @Operation(summary = "根据ID查询", operationId = "system:storage-object:get")
     @GetMapping("/{id}")
-    public Result<StorageObjectVO> getById(@PathVariable("id") Long id) {
+    public Result<StorageObjectVO> getById(@PathVariable("id") String id) {
         return ResultWrapper.ok(storageObjectService.getById(id));
     }
 
@@ -86,7 +86,7 @@ public class StorageObjectController {
 //     */
 //    @Operation(summary = "根据文件ID下载文件")
 //    @GetMapping("/download/{id}")
-//    public ResponseEntity<InputStreamResource> downloadFile(@PathVariable Long id) {
+//    public ResponseEntity<InputStreamResource> downloadFile(@PathVariable String id) {
 //        StorageByteObjectVO byteObjectVO = storageObjectService.getByteArrayById(id);
 //        InputStreamResource resource = new InputStreamResource(new ByteArrayInputStream(byteObjectVO.getContent()));
 //        return ResponseEntity.ok()
@@ -102,7 +102,7 @@ public class StorageObjectController {
 //     */
 //    @Operation(summary = "根据图片ID预览")
 //    @GetMapping(value = "/preview-image/{id}")
-//    public ResponseEntity<InputStreamResource> previewImage(@PathVariable Long id) {
+//    public ResponseEntity<InputStreamResource> previewImage(@PathVariable String id) {
 //        StorageByteObjectVO byteObjectVO = storageObjectService.getByteArrayById(id);
 //        InputStreamResource resource = new InputStreamResource(new ByteArrayInputStream(byteObjectVO.getContent()));
 //        return ResponseEntity.ok()

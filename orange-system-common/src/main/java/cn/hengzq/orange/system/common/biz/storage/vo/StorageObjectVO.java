@@ -12,17 +12,17 @@ import java.io.Serializable;
 public class StorageObjectVO implements Serializable {
 
     @Schema(description = "文件ID")
-    private Long id;
+    private String id;
 
     @Schema(description = "文件原名称")
-    private String originalName;
-
-    @Schema(description = "新名称")
     private String fileName;
 
+    @Schema(description = "文件路径")
+    private String filePath;
+
     @Schema(description = "文件类型")
-    private String type;
+    private String fileType;
 
     @Schema(description = "文件大小 单位：字节")
-    private Long size;
+    private Long fileSize;
 }

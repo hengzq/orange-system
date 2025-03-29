@@ -16,18 +16,18 @@ import lombok.NoArgsConstructor;
 @TableName("sys_user_department_rl")
 public class UserDepartmentRlEntity extends BaseTenantEntity {
 
-    public UserDepartmentRlEntity(Long userId, Long departmentId) {
+    public UserDepartmentRlEntity(String userId, String departmentId) {
         this.userId = userId;
         this.departmentId = departmentId;
     }
 
     @TableId(type = IdType.ASSIGN_ID)
-    private Long id;
+    private String id;
 
     @TableField("department_id")
-    private Long departmentId;
+    private String departmentId;
 
     @TableField("user_id")
-    private Long userId;
+    private String userId;
 
 }

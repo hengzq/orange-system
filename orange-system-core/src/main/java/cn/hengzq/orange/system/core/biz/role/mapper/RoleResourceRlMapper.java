@@ -16,11 +16,11 @@ import java.util.List;
 @Repository
 public interface RoleResourceRlMapper extends CommonMapper<RoleResourceRlEntity> {
 
-    default void deleteByRoleId(Long roleId) {
+    default void deleteByRoleId(String roleId) {
         delete(CommonWrappers.<RoleResourceRlEntity>lambdaQuery().eq(RoleResourceRlEntity::getRoleId, roleId));
     }
 
-    default List<RoleResourceRlEntity> selectListByTypeAndRoleIds(ResourceTypeEnum typeEnum, List<Long> roleIds) {
+    default List<RoleResourceRlEntity> selectListByTypeAndRoleIds(ResourceTypeEnum typeEnum, List<String> roleIds) {
         return this.selectList(Wrappers.<RoleResourceRlEntity>lambdaQuery()
                 .in(RoleResourceRlEntity::getRoleId, roleIds)
                 .eq(RoleResourceRlEntity::getResourceType, typeEnum));

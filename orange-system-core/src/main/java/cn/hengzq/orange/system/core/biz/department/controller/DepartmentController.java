@@ -31,25 +31,25 @@ public class DepartmentController {
 
     @Operation(summary = "新建", operationId = "system:department:add")
     @PostMapping
-    public Result<Long> add(@RequestBody @Validated AddDepartmentParam request) {
+    public Result<String> add(@RequestBody @Validated AddDepartmentParam request) {
         return ResultWrapper.ok(departmentService.add(request));
     }
 
     @Operation(summary = "根据ID删除", operationId = "system:department:delete")
     @DeleteMapping("/{id}")
-    public Result<Boolean> removeById(@PathVariable("id") Long id) {
+    public Result<Boolean> removeById(@PathVariable("id") String id) {
         return ResultWrapper.ok(departmentService.removeById(id));
     }
 
     @Operation(summary = "根据ID更新", operationId = "system:department:update")
     @PutMapping("/{id}")
-    public Result<Boolean> updateById(@PathVariable("id") Long id, @RequestBody @Validated UpdateDepartmentParam request) {
+    public Result<Boolean> updateById(@PathVariable("id") String id, @RequestBody @Validated UpdateDepartmentParam request) {
         return ResultWrapper.ok(departmentService.updateById(id, request));
     }
 
     @Operation(summary = "根据ID查询", operationId = "system:department:get")
     @GetMapping("/{id}")
-    public Result<DepartmentVO> getById(@PathVariable("id") Long id) {
+    public Result<DepartmentVO> getById(@PathVariable("id") String id) {
         return ResultWrapper.ok(departmentService.getById(id));
     }
 

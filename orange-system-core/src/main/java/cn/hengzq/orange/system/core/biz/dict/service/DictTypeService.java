@@ -14,13 +14,13 @@ import java.util.List;
  */
 public interface DictTypeService {
 
-    Long add(AddDictTypeParam param);
+    String add(AddDictTypeParam param);
 
-    Boolean removeById(Long id);
+    Boolean removeById(String id);
 
-    Boolean updateById(Long id, UpdateDictTypeParam param);
+    Boolean updateById(String id, UpdateDictTypeParam param);
 
-    DictTypeVO getById(Long id);
+    DictTypeVO getById(String id);
 
     PageDTO<DictTypeVO> page(DictTypePageParam param);
 

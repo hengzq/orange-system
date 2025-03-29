@@ -14,12 +14,12 @@ public interface LoginLogService {
     /**
      * 添加新的日志记录
      */
-    Long add(AddLoginLogParam param);
+    String add(AddLoginLogParam param);
 
     /**
      * 分页查询
      */
     PageDTO<LoginLogVO> page(LoginLogPageParam param);
 
-    LoginLogVO getById(Long id);
+    LoginLogVO getById(String id);
 }

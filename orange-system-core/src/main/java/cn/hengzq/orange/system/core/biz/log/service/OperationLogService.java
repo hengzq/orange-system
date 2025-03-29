@@ -11,9 +11,9 @@ import java.util.List;
 
 public interface OperationLogService {
 
-    Long add(AddOperationLogParam param);
+    String add(AddOperationLogParam param);
 
-    OperationLogVO getById(Long id);
+    OperationLogVO getById(String id);
 
     PageDTO<OperationLogVO> page(OperationLogPageParam param);
 

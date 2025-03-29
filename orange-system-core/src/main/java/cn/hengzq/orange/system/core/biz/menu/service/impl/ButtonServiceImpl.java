@@ -47,7 +47,7 @@ public class ButtonServiceImpl implements ButtonService {
     }
 
     @Override
-    public Long add(AddButtonParam param) {
+    public String add(AddButtonParam param) {
         Assert.nonNull(param.getPermission(), ButtonErrorCode.BUTTON_PERMISSION_CANNOT_NULL);
         ButtonEntity entity = buttonMapper.selectByPermission(param.getPermission());
         Assert.isNull(entity, ButtonErrorCode.BUTTON_PERMISSION_CANNOT_REPEAT);
@@ -56,7 +56,7 @@ public class ButtonServiceImpl implements ButtonService {
     }
 
     @Override
-    public Boolean updateById(Long id, UpdateButtonParam param) {
+    public Boolean updateById(String id, UpdateButtonParam param) {
         ButtonEntity entity = buttonMapper.selectById(id);
         Assert.nonNull(entity.getId(), GlobalErrorCodeConstant.GLOBAL_DATA_NOT_EXIST);
         if (StrUtil.isNotBlank(param.getPermission()) && !param.getPermission().equals(entity.getPermission())) {
@@ -69,7 +69,7 @@ public class ButtonServiceImpl implements ButtonService {
 
     @Override
     public List<ButtonVO> list(ButtonListParam param) {
-        List<Long> buttonIds = List.of();
+        List<String> buttonIds = List.of();
         if (CollUtil.isNotEmpty(param.getRoleIds())) {
             List<RoleResourceRlEntity> resourceRlEntityList = roleResourceRlMapper.selectListByTypeAndRoleIds(ResourceTypeEnum.BUTTON, param.getRoleIds());
             buttonIds = CollUtils.convertList(resourceRlEntityList, RoleResourceRlEntity::getResourceId);
@@ -86,12 +86,12 @@ public class ButtonServiceImpl implements ButtonService {
     }
 
     @Override
-    public Boolean removeById(Long id) {
+    public Boolean removeById(String id) {
         return buttonMapper.deleteOneById(id);
     }
 
     @Override
-    public ButtonVO getById(Long id) {
+    public ButtonVO getById(String id) {
         return ButtonConverter.INSTANCE.toVO(buttonMapper.selectById(id));
     }
 

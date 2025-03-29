@@ -18,7 +18,7 @@ import java.util.List;
 public class UserDetailVO extends UserVO {
 
     @Schema(description = "用户关联的部门", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-    private List<Long> departmentIds;
+    private List<String> departmentIds;
 
     @Schema(description = "用户拥有角色")
     private List<RoleVO> roles;

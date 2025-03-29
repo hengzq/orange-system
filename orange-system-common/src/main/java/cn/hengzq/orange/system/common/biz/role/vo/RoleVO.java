@@ -14,7 +14,7 @@ import lombok.EqualsAndHashCode;
 public class RoleVO extends BaseTenantDTO {
 
     @Schema(description = "角色id", accessMode = Schema.AccessMode.READ_ONLY)
-    private Long id;
+    private String id;
 
     @Schema(description = "角色名称", requiredMode = Schema.RequiredMode.REQUIRED)
     private String name;

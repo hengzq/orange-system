@@ -19,17 +19,17 @@ import lombok.NoArgsConstructor;
 @TableName("sys_user_role_rl")
 public class UserRoleRlEntity extends BaseTenantEntity {
 
-    public UserRoleRlEntity(Long userId, Long roleId) {
+    public UserRoleRlEntity(String userId, String roleId) {
         this.userId = userId;
         this.roleId = roleId;
     }
 
     @TableId(type = IdType.ASSIGN_ID)
-    private Long id;
+    private String id;
 
     @TableField("user_id")
-    private Long userId;
+    private String userId;
 
     @TableField("role_id")
-    private Long roleId;
+    private String roleId;
 }

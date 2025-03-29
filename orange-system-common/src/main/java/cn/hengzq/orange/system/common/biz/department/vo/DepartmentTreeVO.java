@@ -16,10 +16,10 @@ import java.util.List;
 public class DepartmentTreeVO extends BaseTenantDTO {
 
     @Schema(description = "主键")
-    private Long id;
+    private String id;
 
     @Schema(description = "父级别ID")
-    private Long parentId;
+    private String parentId;
 
     @Schema(description = "部门名称")
     private String name;
