@@ -7,9 +7,10 @@ import cn.hengzq.orange.context.GlobalContextHelper;
 import cn.hengzq.orange.system.common.biz.log.constant.LoginTypeEnum;
 import cn.hengzq.orange.system.common.biz.log.vo.login.param.AddLoginLogParam;
 import cn.hengzq.orange.system.common.biz.log.vo.operation.param.AddOperationLogParam;
+import cn.hengzq.orange.system.common.biz.permission.vo.param.LoginParam;
+import cn.hengzq.orange.system.log.starter.config.LogProperties;
 import cn.hengzq.orange.system.log.starter.event.LoginLogEvent;
 import cn.hengzq.orange.system.log.starter.event.OperationLogEvent;
-import cn.hengzq.orange.system.log.starter.config.LogProperties;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.LocalDateTimeUtil;
 import cn.hutool.core.exceptions.ExceptionUtil;
@@ -93,9 +94,9 @@ public class LogAspect {
             return;
         }
         if (isMatch(requestURI, LOGIN_URL_LIST)) {
-            applicationContext.publishEvent(new LoginLogEvent(generateAddLoginLogParam(request, LoginTypeEnum.LOGIN, startTime)));
+            applicationContext.publishEvent(new LoginLogEvent(generateAddLoginLogParam(request, LoginTypeEnum.LOGIN, point, startTime, exception)));
         } else if (isMatch(requestURI, LOGOUT_URL_LIST)) {
-            applicationContext.publishEvent(new LoginLogEvent(generateAddLoginLogParam(request, LoginTypeEnum.LOGOUT, startTime)));
+            applicationContext.publishEvent(new LoginLogEvent(generateAddLoginLogParam(request, LoginTypeEnum.LOGOUT, point, startTime, exception)));
         } else {
             applicationContext.publishEvent(new OperationLogEvent(generateAddOperationLogParam(request, operation, point, startTime, result, exception)));
         }
@@ -129,15 +130,22 @@ public class LogAspect {
                 .build();
     }
 
-    private AddLoginLogParam generateAddLoginLogParam(HttpServletRequest request, LoginTypeEnum typeEnum, LocalDateTime startTime) {
+    private AddLoginLogParam generateAddLoginLogParam(HttpServletRequest request, LoginTypeEnum typeEnum, ProceedingJoinPoint point, LocalDateTime startTime, Throwable exception) {
+        String account = GlobalContextHelper.getUserInfo().getLoginAccount();
+        if (StrUtil.isBlank(account)) {
+            Object[] args = point.getArgs();
+            LoginParam loginParam = (LoginParam) args[0];
+            account = loginParam.getLoginAccount();
+        }
         return AddLoginLogParam.builder()
                 .requestId(GlobalContextHelper.getRequestId())
-                .account(GlobalContextHelper.getUserInfo().getLoginAccount())
+                .account(account)
                 .type(typeEnum)
                 .userId(GlobalContextHelper.getUserId())
                 .userIp(getClientIp(request))
                 .userAgent(ServletHolder.getUserAgent(request))
                 .loginTime(startTime)
+                .status(Objects.isNull(exception) ? OperationStatusEnum.SUCCESS : OperationStatusEnum.FAIL)
                 .build();
     }
 
