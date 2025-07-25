@@ -57,7 +57,9 @@ public class LoginLogServiceImpl implements LoginLogService, LoginLogApi {
         List<LoginLogVO> records = pageDTO.getRecords();
         Map<String, String> userNameMap = userService.getNameMapByIds(CollUtils.convertSet(records, LoginLogVO::getUserId));
         records.forEach(record -> {
-            record.setUserName(userNameMap.get(record.getUserId()));
+            if (userNameMap.containsKey(record.getUserId())) {
+                record.setUserName(userNameMap.get(record.getUserId()));
+            }
         });
         return pageDTO;
     }
