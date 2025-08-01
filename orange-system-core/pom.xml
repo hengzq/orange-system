@@ -17,6 +17,12 @@
     <dependencies>
         <dependency>
             <groupId>cn.hengzq.orange</groupId>
+            <artifactId>orange-starter-mcp-server-webmvc</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.hengzq.orange</groupId>
             <artifactId>orange-starter-security</artifactId>
         </dependency>
         <dependency>

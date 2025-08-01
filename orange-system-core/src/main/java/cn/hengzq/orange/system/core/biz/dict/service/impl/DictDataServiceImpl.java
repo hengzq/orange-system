@@ -14,12 +14,14 @@ import cn.hengzq.orange.system.core.biz.dict.converter.DictDataConverter;
 import cn.hengzq.orange.system.core.biz.dict.entity.DictDataEntity;
 import cn.hengzq.orange.system.core.biz.dict.mapper.DictDataMapper;
 import cn.hengzq.orange.system.core.biz.dict.service.DictDataService;
+import cn.hutool.core.collection.CollUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 
 /**
@@ -35,13 +37,13 @@ public class DictDataServiceImpl implements DictDataService {
     @Override
     public String add(AddDictDataParam param) {
         DictDataEntity entity = DictDataConverter.INSTANCE.toEntity(param);
-       
+
         return dictDataMapper.insertOne(entity);
     }
 
     @Override
     public Boolean removeById(String id) {
-        return dictDataMapper.deleteOneById(id)  ;
+        return dictDataMapper.deleteOneById(id);
     }
 
     @Override
@@ -65,6 +67,19 @@ public class DictDataServiceImpl implements DictDataService {
         List<DictDataEntity> entityList = dictDataMapper.selectList(CommonWrappers.<DictDataEntity>lambdaQuery()
                 .eq(DictDataEntity::getDictType, param.getDictType()));
         return DictDataConverter.INSTANCE.toListVO(entityList);
+    }
+
+    @Override
+    public Map<String, List<DictDataVO>> getDictDataMapByTypes(List<String> dictTypeList) {
+        if (CollUtil.isEmpty(dictTypeList)) {
+            return Map.of();
+        }
+        List<DictDataEntity> dataEntityList = dictDataMapper.selectList(CommonWrappers.<DictDataEntity>lambdaQuery().in(DictDataEntity::getDictType, dictTypeList));
+        List<DictDataVO> listVO = DictDataConverter.INSTANCE.toListVO(dataEntityList);
+        if (CollUtil.isEmpty(listVO)) {
+            return Map.of();
+        }
+        return listVO.stream().collect(Collectors.groupingBy(DictDataVO::getDictType));
     }
 
     @Override

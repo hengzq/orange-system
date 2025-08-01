@@ -1,7 +1,10 @@
 package cn.hengzq.orange.system.common.biz.dict.vo.type.param;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
@@ -9,6 +12,9 @@ import java.io.Serializable;
  * @author hengzq
  */
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Schema(description = "字典类型-查询所有数据")
 public class DictTypeListParam implements Serializable {
 

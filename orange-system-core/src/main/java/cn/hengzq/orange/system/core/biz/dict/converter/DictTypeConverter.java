@@ -2,6 +2,7 @@ package cn.hengzq.orange.system.core.biz.dict.converter;
 
 import cn.hengzq.orange.common.converter.Converter;
 import cn.hengzq.orange.common.dto.PageDTO;
+import cn.hengzq.orange.system.common.biz.dict.vo.type.DictTypeDetailVO;
 import cn.hengzq.orange.system.common.biz.dict.vo.type.DictTypeVO;
 import cn.hengzq.orange.system.common.biz.dict.vo.type.param.AddDictTypeParam;
 import cn.hengzq.orange.system.common.biz.dict.vo.type.param.UpdateDictTypeParam;
@@ -35,4 +36,6 @@ public interface DictTypeConverter extends Converter {
     DictTypeEntity toUpdateEntity(DictTypeEntity entity, UpdateDictTypeParam param);
 
     PageDTO<DictTypeVO> toPage(PageDTO<DictTypeEntity> page);
+
+    List<DictTypeDetailVO> toListDetail(List<DictTypeVO> list);
 }
