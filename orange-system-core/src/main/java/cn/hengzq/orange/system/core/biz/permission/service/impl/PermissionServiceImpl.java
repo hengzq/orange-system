@@ -10,10 +10,10 @@ import cn.hengzq.orange.system.common.biz.menu.vo.ButtonVO;
 import cn.hengzq.orange.system.common.biz.menu.vo.MenuDetailVO;
 import cn.hengzq.orange.system.common.biz.menu.vo.param.ButtonListParam;
 import cn.hengzq.orange.system.common.biz.menu.vo.param.MenuListParam;
-import cn.hengzq.orange.system.common.biz.permission.vo.AuthUserInfoVO;
-import cn.hengzq.orange.system.common.biz.role.vo.RoleVO;
-import cn.hengzq.orange.system.common.biz.role.vo.param.AssignResourcesToOneRoleParam;
-import cn.hengzq.orange.system.common.biz.user.vo.param.AssignRolesToOneUserParam;
+import cn.hengzq.orange.system.common.biz.permission.vo.AuthUserInfoResponse;
+import cn.hengzq.orange.system.common.biz.role.dto.RoleResponse;
+import cn.hengzq.orange.system.common.biz.role.dto.request.AssignResourcesToOneRoleParam;
+import cn.hengzq.orange.system.common.biz.user.dto.request.AssignRolesToOneUserParam;
 import cn.hengzq.orange.system.core.biz.menu.service.ButtonService;
 import cn.hengzq.orange.system.core.biz.menu.service.MenuService;
 import cn.hengzq.orange.system.core.biz.permission.converter.PermissionConverter;
@@ -94,22 +94,22 @@ public class PermissionServiceImpl implements PermissionService {
     }
 
     @Override
-    public AuthUserInfoVO getUserInfo() {
+    public AuthUserInfoResponse getUserInfo() {
         String userId = GlobalContextHelper.getUserId();
         UserEntity entity = userMapper.selectById(userId);
-        AuthUserInfoVO authUserInfoVO = BeanUtil.copyProperties(entity, AuthUserInfoVO.class);
+        AuthUserInfoResponse authUserInfoVO = BeanUtil.copyProperties(entity, AuthUserInfoResponse.class);
         Assert.nonNull(authUserInfoVO, GlobalErrorCodeConstant.GLOBAL_PARAMETER_ID_IS_INVALID);
 
         // 封装角色
-        List<RoleVO> roleVOS = roleService.listByUserId(userId);
-        List<String> rolePerms = CollUtils.convertList(roleVOS, RoleVO::getPermission);
+        List<RoleResponse> roleResponses = roleService.listByUserId(userId);
+        List<String> rolePerms = CollUtils.convertList(roleResponses, RoleResponse::getPermission);
         if (CollUtil.isEmpty(rolePerms)) {
             return authUserInfoVO;
         }
         authUserInfoVO.setRolePermissions(rolePerms);
 
         // 封装菜单
-        List<String> roleIds = CollUtils.convertList(roleVOS, RoleVO::getId);
+        List<String> roleIds = CollUtils.convertList(roleResponses, RoleResponse::getId);
 
         List<MenuDetailVO> menuVOList;
         // admin 拥有所有的权限
@@ -121,9 +121,9 @@ public class PermissionServiceImpl implements PermissionService {
         if (CollUtil.isEmpty(menuVOList)) {
             return authUserInfoVO;
         }
-        List<AuthUserInfoVO.Menu> menus = menuVOList.stream().filter(item -> Objects.nonNull(item.getHidden()) && !item.getHidden())
+        List<AuthUserInfoResponse.Menu> menus = menuVOList.stream().filter(item -> Objects.nonNull(item.getHidden()) && !item.getHidden())
                 .map(PermissionConverter.INSTANCE::toMenu)
-                .sorted(Comparator.comparing(AuthUserInfoVO.Menu::getSort)).toList();
+                .sorted(Comparator.comparing(AuthUserInfoResponse.Menu::getSort)).toList();
         authUserInfoVO.setMenus(menus);
         authUserInfoVO.setMenuPermissions(CollUtils.convertList(menuVOList, MenuDetailVO::getPermission));
 

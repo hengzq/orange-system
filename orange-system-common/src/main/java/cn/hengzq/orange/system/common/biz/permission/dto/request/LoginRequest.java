@@ -1,4 +1,4 @@
-package cn.hengzq.orange.system.common.biz.permission.vo.param;
+package cn.hengzq.orange.system.common.biz.permission.dto.request;
 
 
 import cn.hengzq.orange.common.constant.TenantConstant;
@@ -10,8 +10,8 @@ import lombok.Data;
  * @author hengzq
  */
 @Data
-@Schema(description = "登陆参数")
-public class LoginParam {
+@Schema(description = "登陆请求参数")
+public class LoginRequest {
 
     @Schema(description = "登陆账号")
     @NotBlank(message = "登陆账号不能为空.")

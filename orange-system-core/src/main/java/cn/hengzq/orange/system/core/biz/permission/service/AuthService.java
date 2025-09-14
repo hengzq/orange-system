@@ -1,8 +1,8 @@
 package cn.hengzq.orange.system.core.biz.permission.service;
 
 
-import cn.hengzq.orange.system.common.biz.permission.vo.TokenVO;
-import cn.hengzq.orange.system.common.biz.permission.vo.param.LoginParam;
+import cn.hengzq.orange.system.common.biz.permission.dto.LoginResponse;
+import cn.hengzq.orange.system.common.biz.permission.dto.request.LoginRequest;
 
 /**
  * @author hengzq
@@ -10,7 +10,7 @@ import cn.hengzq.orange.system.common.biz.permission.vo.param.LoginParam;
 public interface AuthService {
 
 
-    TokenVO login(LoginParam param);
+    LoginResponse login(LoginRequest param);
 
 
     String passwordEncrypt(String password);

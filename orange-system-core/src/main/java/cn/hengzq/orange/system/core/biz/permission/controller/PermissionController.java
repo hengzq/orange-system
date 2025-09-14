@@ -2,9 +2,9 @@ package cn.hengzq.orange.system.core.biz.permission.controller;
 
 import cn.hengzq.orange.common.result.Result;
 import cn.hengzq.orange.common.result.ResultWrapper;
-import cn.hengzq.orange.system.common.biz.permission.vo.AuthUserInfoVO;
-import cn.hengzq.orange.system.common.biz.role.vo.param.AssignResourcesToOneRoleParam;
-import cn.hengzq.orange.system.common.biz.user.vo.param.AssignRolesToOneUserParam;
+import cn.hengzq.orange.system.common.biz.permission.vo.AuthUserInfoResponse;
+import cn.hengzq.orange.system.common.biz.role.dto.request.AssignResourcesToOneRoleParam;
+import cn.hengzq.orange.system.common.biz.user.dto.request.AssignRolesToOneUserParam;
 import cn.hengzq.orange.system.common.constant.SystemConstant;
 import cn.hengzq.orange.system.core.biz.permission.service.PermissionService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -35,7 +35,7 @@ public class PermissionController {
 
     @Operation(summary = "获取登陆用户信息", operationId = "system:permission:user-info")
     @GetMapping("/user-info")
-    public Result<AuthUserInfoVO> getUserInfo() {
+    public Result<AuthUserInfoResponse> getUserInfo() {
         return ResultWrapper.ok(permissionService.getUserInfo());
     }
 

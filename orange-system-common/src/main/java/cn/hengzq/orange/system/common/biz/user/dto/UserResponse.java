@@ -1,18 +1,21 @@
-package cn.hengzq.orange.system.common.biz.user.vo.param;
+package cn.hengzq.orange.system.common.biz.user.dto;
 
+import cn.hengzq.orange.common.dto.BaseTenantDTO;
 import cn.hengzq.orange.system.common.biz.user.constant.UserGenderEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-
-import java.io.Serializable;
-import java.util.List;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author hengzq
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
-@Schema(description = "用户管理-新增参数")
-public class AddUserParam implements Serializable {
+@Schema(description = "用户管理 - 响应数据")
+public class UserResponse extends BaseTenantDTO {
+
+    @Schema(description = "主键", accessMode = Schema.AccessMode.READ_ONLY)
+    private String id;
 
     @Schema(description = "用户名称")
     private String name;
@@ -29,9 +32,4 @@ public class AddUserParam implements Serializable {
     @Schema(description = "登陆账号")
     private String loginAccount;
 
-    @Schema(description = "密码")
-    private String loginPassword;
-
-    @Schema(description = "用户关联的部门", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-    private List<String> departmentIds;
 }

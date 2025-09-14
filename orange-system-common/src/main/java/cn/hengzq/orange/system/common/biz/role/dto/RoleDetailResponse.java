@@ -1,17 +1,23 @@
-package cn.hengzq.orange.system.common.biz.role.vo;
+package cn.hengzq.orange.system.common.biz.role.dto;
 
 import cn.hengzq.orange.common.dto.BaseTenantDTO;
+import cn.hengzq.orange.system.common.biz.menu.vo.ButtonVO;
+import cn.hengzq.orange.system.common.biz.menu.vo.MenuVO;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
+
+import java.util.List;
 
 /**
  * @author hengzq
  */
 @EqualsAndHashCode(callSuper = true)
-@Schema(description = "角色")
+@Schema(description = "角色管理 - 角色详情信息")
 @Data
-public class RoleVO extends BaseTenantDTO {
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class RoleDetailResponse extends BaseTenantDTO {
 
     @Schema(description = "角色id", accessMode = Schema.AccessMode.READ_ONLY)
     private String id;
@@ -33,5 +39,11 @@ public class RoleVO extends BaseTenantDTO {
 
     @Schema(description = "备注")
     private String remark;
+
+    @Schema(description = "角色拥有菜单信息")
+    private List<MenuVO> menus;
+
+    @Schema(description = "角色拥有的按钮信息")
+    private List<ButtonVO> buttons;
 
 }

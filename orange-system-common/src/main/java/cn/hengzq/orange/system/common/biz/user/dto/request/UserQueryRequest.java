@@ -1,4 +1,4 @@
-package cn.hengzq.orange.system.common.biz.user.vo.param;
+package cn.hengzq.orange.system.common.biz.user.dto.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -11,7 +11,7 @@ import java.util.List;
  */
 @Data
 @Schema(description = "用户管理-查询所有的数据")
-public class UserListParam implements Serializable {
+public class UserQueryRequest implements Serializable {
 
 
     @Schema(description = "批量 - 用户ID")

@@ -1,29 +1,32 @@
 package cn.hengzq.orange.system.core.biz.role.service;
 
 import cn.hengzq.orange.common.dto.PageDTO;
-import cn.hengzq.orange.system.common.biz.role.vo.RoleDetailVO;
-import cn.hengzq.orange.system.common.biz.role.vo.RoleVO;
-import cn.hengzq.orange.system.common.biz.role.vo.param.*;
+import cn.hengzq.orange.system.common.biz.role.dto.RoleDetailResponse;
+import cn.hengzq.orange.system.common.biz.role.dto.RoleResponse;
+import cn.hengzq.orange.system.common.biz.role.dto.request.*;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author 程序员橙子
  */
 public interface RoleService {
 
-    String add(AddRoleParam param);
+    String createRole(RoleCreateRequest param);
 
-    Boolean updateById(String id, UpdateRoleParam param);
+    Boolean deleteRoleById(String id);
 
-    PageDTO<RoleVO> page(RolePageParam query);
+    Boolean updateRoleById(String id, RoleUpdateRequest param);
 
-    List<RoleVO> listByUserId(String userId);
+    Optional<RoleResponse> getRoleById(String id);
 
-    Boolean removeById(String id);
+    RoleDetailResponse getRoleDetailById(String id);
 
-    RoleDetailVO getById(String id, RoleDetailQueryParam param);
+    PageDTO<RoleResponse> pageRoles(RolePageRequest query);
 
-    List<RoleVO> list(RoleListParam param);
+    List<RoleResponse> listRoles(RoleQueryRequest param);
+
+    List<RoleResponse> listByUserId(String userId);
 
 }

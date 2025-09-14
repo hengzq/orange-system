@@ -1,5 +1,6 @@
 package cn.hengzq.orange.system.log.starter.aspect;
 
+import cn.hengzq.orange.common.constant.GlobalConstant;
 import cn.hengzq.orange.common.enums.support.OperationStatusEnum;
 import cn.hengzq.orange.common.enums.support.RequestMethodEnum;
 import cn.hengzq.orange.common.servlet.ServletHolder;
@@ -7,7 +8,7 @@ import cn.hengzq.orange.context.GlobalContextHelper;
 import cn.hengzq.orange.system.common.biz.log.constant.LoginTypeEnum;
 import cn.hengzq.orange.system.common.biz.log.vo.login.param.AddLoginLogParam;
 import cn.hengzq.orange.system.common.biz.log.vo.operation.param.AddOperationLogParam;
-import cn.hengzq.orange.system.common.biz.permission.vo.param.LoginParam;
+import cn.hengzq.orange.system.common.biz.permission.dto.request.LoginRequest;
 import cn.hengzq.orange.system.log.starter.config.LogProperties;
 import cn.hengzq.orange.system.log.starter.event.LoginLogEvent;
 import cn.hengzq.orange.system.log.starter.event.OperationLogEvent;
@@ -25,6 +26,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.slf4j.MDC;
 import org.springframework.context.ApplicationContext;
 import org.springframework.util.AntPathMatcher;
 
@@ -111,7 +113,7 @@ public class LogAspect {
         Tag tag = declaringType.getAnnotation(Tag.class);
 
         return AddOperationLogParam.builder()
-                .requestId(GlobalContextHelper.getRequestId())
+                .requestId(StrUtil.isBlank(GlobalContextHelper.getRequestId()) ? MDC.get(GlobalConstant.TRACE_ID) : GlobalContextHelper.getRequestId())
                 .resourceId(operation.operationId())
                 .resourceName(tag.name() + "-" + operation.summary())
                 .requestUrl(request.getRequestURI())
@@ -134,11 +136,11 @@ public class LogAspect {
         String account = GlobalContextHelper.getUserInfo().getLoginAccount();
         if (StrUtil.isBlank(account)) {
             Object[] args = point.getArgs();
-            LoginParam loginParam = (LoginParam) args[0];
-            account = loginParam.getLoginAccount();
+            LoginRequest loginRequest = (LoginRequest) args[0];
+            account = loginRequest.getLoginAccount();
         }
         return AddLoginLogParam.builder()
-                .requestId(GlobalContextHelper.getRequestId())
+                .requestId(StrUtil.isBlank(GlobalContextHelper.getRequestId()) ? MDC.get(GlobalConstant.TRACE_ID) : GlobalContextHelper.getRequestId())
                 .account(account)
                 .type(typeEnum)
                 .userId(GlobalContextHelper.getUserId())

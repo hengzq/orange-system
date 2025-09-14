@@ -5,8 +5,9 @@ import cn.hengzq.orange.common.dto.LoginUserInfo;
 import cn.hengzq.orange.common.exception.ServiceException;
 import cn.hengzq.orange.common.util.JwtToken;
 import cn.hengzq.orange.context.GlobalContextHelper;
-import cn.hengzq.orange.system.common.biz.permission.vo.TokenVO;
-import cn.hengzq.orange.system.common.biz.permission.vo.param.LoginParam;
+import cn.hengzq.orange.system.common.biz.permission.dto.LoginResponse;
+import cn.hengzq.orange.system.common.biz.permission.dto.request.LoginRequest;
+import cn.hengzq.orange.system.common.constant.RedisKeys;
 import cn.hengzq.orange.system.core.biz.permission.service.AuthService;
 import cn.hengzq.orange.system.core.biz.user.converter.UserConverter;
 import cn.hengzq.orange.system.core.biz.user.entity.UserEntity;
@@ -14,10 +15,14 @@ import cn.hengzq.orange.system.core.biz.user.mapper.UserMapper;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.asymmetric.KeyType;
 import cn.hutool.crypto.asymmetric.RSA;
+import com.alibaba.fastjson2.JSON;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author hengzq
@@ -37,9 +42,11 @@ public class AuthServiceImpl implements AuthService {
 
     private final UserMapper userMapper;
 
+    private final StringRedisTemplate stringRedisTemplate;
+
 
     @Override
-    public TokenVO login(LoginParam param) {
+    public LoginResponse login(LoginRequest param) {
         GlobalContextHelper.setContext(LoginUserInfo.builder().tenantId(param.getTenantId()).build());
         UserEntity user = userMapper.selectByLoginAccount(param.getLoginAccount());
         if (user == null) {
@@ -55,7 +62,9 @@ public class AuthServiceImpl implements AuthService {
         }
         LoginUserInfo userInfo = UserConverter.INSTANCE.toLoginUserInfo(user);
         GlobalContextHelper.setContext(userInfo);
-        return new TokenVO(JwtToken.createToken(userInfo));
+        String token = JwtToken.createToken(userInfo);
+        stringRedisTemplate.opsForValue().set(RedisKeys.getAuthTokenKey(token), JSON.toJSONString(userInfo), 2, TimeUnit.HOURS);
+        return LoginResponse.of(token);
     }
 
     @Override

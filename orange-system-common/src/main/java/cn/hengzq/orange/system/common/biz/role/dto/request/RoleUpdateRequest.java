@@ -1,4 +1,4 @@
-package cn.hengzq.orange.system.common.biz.role.vo.param;
+package cn.hengzq.orange.system.common.biz.role.dto.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -6,13 +6,12 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
-  * @author hengzq
+ * @author hengzq
  */
-@Schema(description = "角色管理 - 新增参数")
+@Schema(description = "角色更新参数")
 @Data
-public class AddRoleParam implements Serializable {
+public class RoleUpdateRequest implements Serializable {
 
-    //    @NotNull(message = RoleErrorCode.ROLE_NAME_CANNOT_NULL_KEY)
     @Schema(description = "角色名称")
     private String name;
 

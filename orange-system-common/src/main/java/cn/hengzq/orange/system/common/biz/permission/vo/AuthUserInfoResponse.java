@@ -1,6 +1,6 @@
 package cn.hengzq.orange.system.common.biz.permission.vo;
 
-import cn.hengzq.orange.system.common.biz.user.vo.UserVO;
+import cn.hengzq.orange.system.common.biz.user.dto.UserResponse;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(description = "登陆用户的信息")
-public class AuthUserInfoVO extends UserVO {
+public class AuthUserInfoResponse extends UserResponse {
 
     @Schema(description = "角色权限标识")
     private List<String> rolePermissions;

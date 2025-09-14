@@ -1,4 +1,4 @@
-package cn.hengzq.orange.system.common.biz.role.vo.param;
+package cn.hengzq.orange.system.common.biz.role.dto.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotEmpty;

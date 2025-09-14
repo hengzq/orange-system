@@ -6,7 +6,7 @@ import cn.hengzq.orange.system.common.biz.menu.vo.ButtonVO;
 import cn.hengzq.orange.system.common.biz.menu.vo.MenuDetailVO;
 import cn.hengzq.orange.system.common.biz.menu.vo.param.AddButtonParam;
 import cn.hengzq.orange.system.common.biz.menu.vo.param.UpdateButtonParam;
-import cn.hengzq.orange.system.common.biz.permission.vo.AuthUserInfoVO;
+import cn.hengzq.orange.system.common.biz.permission.vo.AuthUserInfoResponse;
 import cn.hengzq.orange.system.core.biz.menu.entity.ButtonEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -40,5 +40,5 @@ public interface PermissionConverter extends Converter {
 
     List<ButtonVO> toListVO(List<ButtonEntity> entityList);
 
-    AuthUserInfoVO.Menu toMenu(MenuDetailVO menu);
+    AuthUserInfoResponse.Menu toMenu(MenuDetailVO menu);
 }

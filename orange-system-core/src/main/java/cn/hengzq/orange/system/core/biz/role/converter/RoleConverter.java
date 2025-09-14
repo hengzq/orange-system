@@ -2,9 +2,10 @@ package cn.hengzq.orange.system.core.biz.role.converter;
 
 import cn.hengzq.orange.common.converter.Converter;
 import cn.hengzq.orange.common.dto.PageDTO;
-import cn.hengzq.orange.system.common.biz.role.vo.RoleVO;
-import cn.hengzq.orange.system.common.biz.role.vo.param.AddRoleParam;
-import cn.hengzq.orange.system.common.biz.role.vo.param.UpdateRoleParam;
+import cn.hengzq.orange.system.common.biz.role.dto.RoleDetailResponse;
+import cn.hengzq.orange.system.common.biz.role.dto.RoleResponse;
+import cn.hengzq.orange.system.common.biz.role.dto.request.RoleCreateRequest;
+import cn.hengzq.orange.system.common.biz.role.dto.request.RoleUpdateRequest;
 import cn.hengzq.orange.system.core.biz.role.entity.RoleEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -22,9 +23,9 @@ public interface RoleConverter extends Converter {
 
     RoleConverter INSTANCE = Mappers.getMapper(RoleConverter.class);
 
-    RoleEntity toEntity(RoleVO vo);
+    RoleEntity toEntity(RoleResponse vo);
 
-    RoleEntity toEntity(AddRoleParam param);
+    RoleEntity toEntity(RoleCreateRequest param);
 
 
     @Mapping(source = "entity.id", target = "id")
@@ -33,11 +34,13 @@ public interface RoleConverter extends Converter {
     @Mapping(source = "param.sort", target = "sort")
     @Mapping(source = "param.enabled", target = "enabled")
     @Mapping(source = "param.remark", target = "remark")
-    RoleEntity toUpdateEntity(RoleEntity entity, UpdateRoleParam param);
+    RoleEntity toUpdateEntity(RoleEntity entity, RoleUpdateRequest param);
 
-    PageDTO<RoleVO> toPage(PageDTO<RoleEntity> page);
+    PageDTO<RoleResponse> toPage(PageDTO<RoleEntity> page);
 
-    List<RoleVO> toListVO(List<RoleEntity> entityList);
+    List<RoleResponse> toListVO(List<RoleEntity> entityList);
 
-    RoleVO toVO(RoleEntity roleEntity);
+    RoleResponse toVO(RoleEntity roleEntity);
+
+    RoleDetailResponse toDetail(RoleEntity roleEntity);
 }

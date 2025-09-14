@@ -1,12 +1,13 @@
 package cn.hengzq.orange.system.core.biz.user.service;
 
 import cn.hengzq.orange.common.dto.PageDTO;
-import cn.hengzq.orange.system.common.biz.user.vo.UserDetailVO;
-import cn.hengzq.orange.system.common.biz.user.vo.UserVO;
-import cn.hengzq.orange.system.common.biz.user.vo.param.*;
+import cn.hengzq.orange.system.common.biz.user.dto.UserDetailResponse;
+import cn.hengzq.orange.system.common.biz.user.dto.UserResponse;
+import cn.hengzq.orange.system.common.biz.user.dto.request.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -15,11 +16,12 @@ import java.util.Set;
 public interface UserService {
 
 
-    String add(AddUserParam param);
+    String createUser(UserCreateRequest param);
 
 
-    Boolean updateById(String id, UpdateUserParam param);
+    void deleteUserById(String id);
 
+    void updateUserById(String id, UserUpdateRequest param);
 
     /**
      * 更新密码
@@ -29,27 +31,28 @@ public interface UserService {
     /**
      * 重置密码
      */
-    Boolean resetPassword(ResetPasswordParam param);
+    void resetPasswordById(String id, UserResetPasswordRequest request);
+
+
+    Optional<UserResponse> getUserById(String id);
+
 
     /**
      * 根据用户ID查询用户
      */
-    UserDetailVO getById(String userId, UserDetailQueryParam param);
+    UserDetailResponse getById(String userId, UserDetailQueryParam param);
 
     /**
      * 根据登录账号查询用户
      */
-    UserVO getByLoginAccount(String loginAccount);
+    UserResponse getByLoginAccount(String loginAccount);
 
+    Map<String, String> getNameMapByIds(Set<String> ids);
 
     /**
      * 分页查询
      */
-    PageDTO<UserVO> page(UserPageParam query);
+    PageDTO<UserResponse> page(UserPageRequest query);
 
-    List<UserVO> list(UserListParam query);
-
-    Map<String, String> getNameMapByIds(Set<String> ids);
-
-    Boolean removeById(String id);
+    List<UserResponse> list(UserQueryRequest query);
 }

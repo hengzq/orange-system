@@ -1,4 +1,4 @@
-package cn.hengzq.orange.system.common.biz.user.vo.param;
+package cn.hengzq.orange.system.common.biz.user.dto.request;
 
 import cn.hengzq.orange.common.constant.GlobalErrorCodeConstant;
 import cn.hengzq.orange.common.exception.ServiceException;
@@ -13,7 +13,7 @@ import java.io.Serializable;
 
 @Data
 @Schema(description = "用户管理-重置密码")
-public class ResetPasswordParam implements Serializable {
+public class UserResetPasswordRequest implements Serializable {
 
     @Schema(description = "用户ID")
     @NotNull(message = "用户ID,用户ID为空")

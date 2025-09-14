@@ -2,8 +2,8 @@ package cn.hengzq.orange.system.core.biz.permission.controller;
 
 import cn.hengzq.orange.common.result.Result;
 import cn.hengzq.orange.common.result.ResultWrapper;
-import cn.hengzq.orange.system.common.biz.permission.vo.TokenVO;
-import cn.hengzq.orange.system.common.biz.permission.vo.param.LoginParam;
+import cn.hengzq.orange.system.common.biz.permission.dto.LoginResponse;
+import cn.hengzq.orange.system.common.biz.permission.dto.request.LoginRequest;
 import cn.hengzq.orange.system.common.constant.SystemConstant;
 import cn.hengzq.orange.system.core.biz.permission.service.AuthService;
 import cn.hengzq.orange.system.core.biz.user.service.UserService;
@@ -28,9 +28,9 @@ public class AuthController {
 
     @Operation(summary = "账号密码登陆", operationId = "system:permission:auth:login")
     @PostMapping(value = "/login")
-    public Result<TokenVO> login(@Validated @RequestBody LoginParam param) {
-        TokenVO tokenVo = authService.login(param);
-        return ResultWrapper.ok(tokenVo);
+    public Result<LoginResponse> login(@Validated @RequestBody LoginRequest param) {
+        LoginResponse loginResponse = authService.login(param);
+        return ResultWrapper.ok(loginResponse);
     }
 
     @Operation(summary = "账号退出登录", operationId = "system:permission:auth:logout")
