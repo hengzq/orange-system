@@ -1,29 +1,30 @@
 package cn.hengzq.orange.system.core.biz.dict.service;
 
 import cn.hengzq.orange.common.dto.PageDTO;
-import cn.hengzq.orange.system.common.biz.dict.vo.type.DictTypeVO;
-import cn.hengzq.orange.system.common.biz.dict.vo.type.param.AddDictTypeParam;
-import cn.hengzq.orange.system.common.biz.dict.vo.type.param.DictTypeListParam;
-import cn.hengzq.orange.system.common.biz.dict.vo.type.param.DictTypePageParam;
-import cn.hengzq.orange.system.common.biz.dict.vo.type.param.UpdateDictTypeParam;
+import cn.hengzq.orange.system.common.biz.dict.dto.type.DictTypeResponse;
+import cn.hengzq.orange.system.common.biz.dict.dto.type.request.DictTypeCreateRequest;
+import cn.hengzq.orange.system.common.biz.dict.dto.type.request.DictTypeSearchRequest;
+import cn.hengzq.orange.system.common.biz.dict.dto.type.request.DictTypePageRequest;
+import cn.hengzq.orange.system.common.biz.dict.dto.type.request.DictTypeUpdateRequest;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author hengzq
  */
 public interface DictTypeService {
 
-    String add(AddDictTypeParam param);
+    String create(DictTypeCreateRequest request);
 
-    Boolean removeById(String id);
+    void deleteById(String id);
 
-    Boolean updateById(String id, UpdateDictTypeParam param);
+    Boolean updateById(String id, DictTypeUpdateRequest request);
 
-    DictTypeVO getById(String id);
+    Optional<DictTypeResponse> getById(String id);
 
-    PageDTO<DictTypeVO> page(DictTypePageParam param);
+    PageDTO<DictTypeResponse> page(DictTypePageRequest request);
 
-    List<DictTypeVO> list(DictTypeListParam queryVo);
+    List<DictTypeResponse> search(DictTypeSearchRequest request);
 
 }

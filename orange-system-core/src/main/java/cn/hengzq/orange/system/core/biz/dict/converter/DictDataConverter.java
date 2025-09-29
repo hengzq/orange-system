@@ -3,9 +3,9 @@ package cn.hengzq.orange.system.core.biz.dict.converter;
 
 import cn.hengzq.orange.common.converter.Converter;
 import cn.hengzq.orange.common.dto.PageDTO;
-import cn.hengzq.orange.system.common.biz.dict.vo.data.DictDataVO;
-import cn.hengzq.orange.system.common.biz.dict.vo.data.param.AddDictDataParam;
-import cn.hengzq.orange.system.common.biz.dict.vo.data.param.UpdateDictDataParam;
+import cn.hengzq.orange.system.common.biz.dict.dto.data.DictDataVO;
+import cn.hengzq.orange.system.common.biz.dict.dto.data.param.DictDataCreateRequest;
+import cn.hengzq.orange.system.common.biz.dict.dto.data.param.DictDataUpdateRequest;
 import cn.hengzq.orange.system.core.biz.dict.entity.DictDataEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -24,7 +24,7 @@ public interface DictDataConverter extends Converter {
 
     PageDTO<DictDataVO> toPage(PageDTO<DictDataEntity> page);
 
-    DictDataEntity toEntity(AddDictDataParam param);
+    DictDataEntity toEntity(DictDataCreateRequest param);
 
     DictDataVO toVO(DictDataEntity entity);
 
@@ -38,5 +38,5 @@ public interface DictDataConverter extends Converter {
     @Mapping(source = "param.enabled", target = "enabled")
     @Mapping(source = "param.sort", target = "sort")
     @Mapping(source = "param.description", target = "description")
-    DictDataEntity toUpdateEntity(DictDataEntity entity, UpdateDictDataParam param);
+    DictDataEntity toUpdateEntity(DictDataEntity entity, DictDataUpdateRequest param);
 }

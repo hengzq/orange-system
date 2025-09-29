@@ -2,10 +2,10 @@ package cn.hengzq.orange.system.core.biz.dict.service.impl;
 
 import cn.hengzq.orange.common.service.mcp.McpServerService;
 import cn.hengzq.orange.common.util.CollUtils;
-import cn.hengzq.orange.system.common.biz.dict.vo.data.DictDataVO;
-import cn.hengzq.orange.system.common.biz.dict.vo.type.DictTypeDetailVO;
-import cn.hengzq.orange.system.common.biz.dict.vo.type.DictTypeVO;
-import cn.hengzq.orange.system.common.biz.dict.vo.type.param.DictTypeListParam;
+import cn.hengzq.orange.system.common.biz.dict.dto.data.DictDataVO;
+import cn.hengzq.orange.system.common.biz.dict.dto.type.DictTypeDetailVO;
+import cn.hengzq.orange.system.common.biz.dict.dto.type.DictTypeResponse;
+import cn.hengzq.orange.system.common.biz.dict.dto.type.request.DictTypeSearchRequest;
 import cn.hengzq.orange.system.core.biz.dict.converter.DictTypeConverter;
 import cn.hengzq.orange.system.core.biz.dict.service.DictDataService;
 import cn.hengzq.orange.system.core.biz.dict.service.DictTypeService;
@@ -49,12 +49,12 @@ public class DictMcpServiceImpl implements McpServerService {
                     "such as for form rendering, data validation, configuration lookup, or dropdown option generation"
     )
     public List<DictTypeDetailVO> dictList() {
-        List<DictTypeVO> list = dictTypeService.list(DictTypeListParam.builder().build());
+        List<DictTypeResponse> list = dictTypeService.search(DictTypeSearchRequest.builder().build());
         List<DictTypeDetailVO> detailList = DictTypeConverter.INSTANCE.toListDetail(list);
         if (CollUtil.isEmpty(detailList)) {
             return List.of();
         }
-        Map<String, List<DictDataVO>> dataMap = dictDataService.getDictDataMapByTypes(CollUtils.convertList(list, DictTypeVO::getDictType));
+        Map<String, List<DictDataVO>> dataMap = dictDataService.getDictDataMapByTypes(CollUtils.convertList(list, DictTypeResponse::getDictType));
         detailList.forEach(item -> {
             item.setDictDataList(dataMap.get(item.getDictType()));
         });

@@ -2,13 +2,12 @@ package cn.hengzq.orange.system.core.biz.dict.controller;
 
 
 import cn.hengzq.orange.common.dto.PageDTO;
-import cn.hengzq.orange.common.result.Result;
-import cn.hengzq.orange.common.result.ResultWrapper;
-import cn.hengzq.orange.system.common.biz.dict.vo.data.DictDataVO;
-import cn.hengzq.orange.system.common.biz.dict.vo.data.param.AddDictDataParam;
-import cn.hengzq.orange.system.common.biz.dict.vo.data.param.DictDataListParam;
-import cn.hengzq.orange.system.common.biz.dict.vo.data.param.DictDataPageParam;
-import cn.hengzq.orange.system.common.biz.dict.vo.data.param.UpdateDictDataParam;
+import cn.hengzq.orange.common.response.ApiResponse;
+import cn.hengzq.orange.system.common.biz.dict.dto.data.DictDataVO;
+import cn.hengzq.orange.system.common.biz.dict.dto.data.param.DictDataCreateRequest;
+import cn.hengzq.orange.system.common.biz.dict.dto.data.param.DictDataPageRequest;
+import cn.hengzq.orange.system.common.biz.dict.dto.data.param.DictDataSearchReqeust;
+import cn.hengzq.orange.system.common.biz.dict.dto.data.param.DictDataUpdateRequest;
 import cn.hengzq.orange.system.common.constant.SystemConstant;
 import cn.hengzq.orange.system.core.biz.dict.service.DictDataService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * @author hengzq
+ * @author 衡哥敲AI代码
  */
 @Tag(name = "系统 - 字典-数据管理")
 @RestController
@@ -31,49 +30,51 @@ public class DictDataController {
 
     private final DictDataService dictDataService;
 
-    @Operation(summary = "新建", operationId = "system:dict-data:add")
+    @Operation(summary = "新建字典数据", operationId = "system:dict-data:create")
     @PostMapping
-    public Result<String> add(@Validated @RequestBody AddDictDataParam param) {
-        return ResultWrapper.ok(dictDataService.add(param));
+    public ApiResponse<String> create(@Validated @RequestBody DictDataCreateRequest request) {
+        return ApiResponse.ok(dictDataService.create(request));
     }
 
-    @Operation(summary = "根据ID删除", operationId = "system:dict-data:delete")
+    @Operation(summary = "根据ID删除字典数据", operationId = "system:dict-data:delete")
     @DeleteMapping("/{id}")
-    public Result<Boolean> deleteById(@Parameter(description = "主键ID") @PathVariable("id") String id) {
-        return ResultWrapper.ok(dictDataService.removeById(id));
+    public ApiResponse<Void> deleteById(@Parameter(description = "主键ID") @PathVariable("id") String id) {
+        dictDataService.deleteById(id);
+        return ApiResponse.ok();
     }
 
-
-    @Operation(summary = "根据ID修改", operationId = "system:dict-data:update")
+    @Operation(summary = "根据ID更新字典数据", operationId = "system:dict-data:update")
     @PutMapping("/{id}")
-    public Result<Boolean> update(@Parameter(description = "主键ID") @PathVariable("id") String id, @RequestBody UpdateDictDataParam param) {
-        return ResultWrapper.ok(dictDataService.updateById(id, param));
+    public ApiResponse<Void> updateById(@Parameter(description = "主键ID") @PathVariable("id") String id,
+                                        @RequestBody DictDataUpdateRequest request) {
+        dictDataService.updateById(id, request);
+        return ApiResponse.ok();
     }
 
-    @Operation(summary = "根据ID查询详情", operationId = "system:dict-data:get")
+    @Operation(summary = "根据ID获取字典数据详情", operationId = "system:dict-data:get")
     @GetMapping("/{id}")
-    public Result<DictDataVO> getById(@PathVariable("id") String id) {
-        return ResultWrapper.ok(dictDataService.getById(id));
+    public ApiResponse<DictDataVO> getById(@PathVariable("id") String id) {
+        return ApiResponse.ok(dictDataService.getById(id).orElse(null));
     }
 
-    @Operation(summary = "分页查询", operationId = "system:dict-data:page")
+    @Operation(summary = "分页查询字典数据", operationId = "system:dict-data:page")
     @PostMapping(value = "/page")
-    public Result<PageDTO<DictDataVO>> page(@RequestBody DictDataPageParam param) {
-        PageDTO<DictDataVO> result = dictDataService.page(param);
-        return ResultWrapper.ok(result);
+    public ApiResponse<PageDTO<DictDataVO>> page(@RequestBody DictDataPageRequest request) {
+        PageDTO<DictDataVO> result = dictDataService.page(request);
+        return ApiResponse.ok(result);
     }
 
-    @Operation(summary = "根据参数查询数据", operationId = "system:dict-data:list")
-    @PostMapping(value = "/list")
-    public Result<List<DictDataVO>> list(@RequestBody DictDataListParam param) {
-        List<DictDataVO> dataVOList = dictDataService.list(param);
-        return ResultWrapper.ok(dataVOList);
+    @Operation(summary = "根据条件查询字典数据列表", operationId = "system:dict-data:search")
+    @PostMapping(value = "/search")
+    public ApiResponse<List<DictDataVO>> search(@RequestBody DictDataSearchReqeust request) {
+        List<DictDataVO> dataVOList = dictDataService.search(request);
+        return ApiResponse.ok(dataVOList);
     }
-//
-//    @Operation(summary = "根据字典类型获取数据", operationId = "system:dict-data:query-by-type")
-//    @GetMapping("/query-by-type/{dictType}")
-//    public Result<List<DictDataVO>> queryByType(@PathVariable String dictType) {
-//        List<DictDataEntity> entityList = dictDataService.listByType(dictType);
-//        return ResultWrapper.ok(DictDataConverter.INSTANCE.toListVo(entityList));
-//    }
+
+    @Operation(summary = "根据字典类型获取数据列表", operationId = "system:dict-data:get-by-type")
+    @GetMapping("/type/{dictType}")
+    public ApiResponse<List<DictDataVO>> searchByDictType(@PathVariable String dictType) {
+        List<DictDataVO> response = dictDataService.searchByDictType(dictType);
+        return ApiResponse.ok(response);
+    }
 }

@@ -2,10 +2,10 @@ package cn.hengzq.orange.system.core.biz.dict.converter;
 
 import cn.hengzq.orange.common.converter.Converter;
 import cn.hengzq.orange.common.dto.PageDTO;
-import cn.hengzq.orange.system.common.biz.dict.vo.type.DictTypeDetailVO;
-import cn.hengzq.orange.system.common.biz.dict.vo.type.DictTypeVO;
-import cn.hengzq.orange.system.common.biz.dict.vo.type.param.AddDictTypeParam;
-import cn.hengzq.orange.system.common.biz.dict.vo.type.param.UpdateDictTypeParam;
+import cn.hengzq.orange.system.common.biz.dict.dto.type.DictTypeDetailVO;
+import cn.hengzq.orange.system.common.biz.dict.dto.type.DictTypeResponse;
+import cn.hengzq.orange.system.common.biz.dict.dto.type.request.DictTypeCreateRequest;
+import cn.hengzq.orange.system.common.biz.dict.dto.type.request.DictTypeUpdateRequest;
 import cn.hengzq.orange.system.core.biz.dict.entity.DictTypeEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -21,21 +21,21 @@ public interface DictTypeConverter extends Converter {
 
     DictTypeConverter INSTANCE = Mappers.getMapper(DictTypeConverter.class);
 
-    DictTypeVO toVO(DictTypeEntity entity);
+    DictTypeResponse toVO(DictTypeEntity entity);
 
-    List<DictTypeVO> toListVO(List<DictTypeEntity> entityList);
+    List<DictTypeResponse> toListVO(List<DictTypeEntity> entityList);
 
-    DictTypeEntity toEntity(AddDictTypeParam param);
+    DictTypeEntity toEntity(DictTypeCreateRequest param);
 
-    DictTypeEntity toEntity(DictTypeVO dictTypeVO);
+    DictTypeEntity toEntity(DictTypeResponse dictTypeResponse);
 
     @Mapping(source = "entity.id", target = "id")
     @Mapping(source = "param.name", target = "name")
     @Mapping(source = "param.enabled", target = "enabled")
     @Mapping(source = "param.description", target = "description")
-    DictTypeEntity toUpdateEntity(DictTypeEntity entity, UpdateDictTypeParam param);
+    DictTypeEntity toUpdateEntity(DictTypeEntity entity, DictTypeUpdateRequest param);
 
-    PageDTO<DictTypeVO> toPage(PageDTO<DictTypeEntity> page);
+    PageDTO<DictTypeResponse> toPage(PageDTO<DictTypeEntity> page);
 
-    List<DictTypeDetailVO> toListDetail(List<DictTypeVO> list);
+    List<DictTypeDetailVO> toListDetail(List<DictTypeResponse> list);
 }

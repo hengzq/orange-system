@@ -84,8 +84,10 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public RoleDetailResponse getRoleDetailById(String id) {
-        RoleDetailResponse response = RoleConverter.INSTANCE.toDetail(roleMapper.selectById(id));
-        Assert.nonNull(response, GlobalErrorCodeConstant.GLOBAL_PARAMETER_ID_IS_INVALID);
+        RoleEntity entity = roleMapper.selectById(id);
+        Assert.nonNull(entity, GlobalErrorCodeConstant.GLOBAL_PARAMETER_ID_IS_INVALID);
+
+        RoleDetailResponse response = RoleConverter.INSTANCE.toDetail(entity);
 
         List<MenuDetailVO> list = menuService.list(MenuListParam.builder().roleIds(List.of(id)).build());
         response.setMenus(list.stream().map(MenuVO.class::cast).toList());

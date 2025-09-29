@@ -2,33 +2,34 @@ package cn.hengzq.orange.system.core.biz.dict.service;
 
 
 import cn.hengzq.orange.common.dto.PageDTO;
-import cn.hengzq.orange.system.common.biz.dict.vo.data.DictDataVO;
-import cn.hengzq.orange.system.common.biz.dict.vo.data.param.AddDictDataParam;
-import cn.hengzq.orange.system.common.biz.dict.vo.data.param.DictDataListParam;
-import cn.hengzq.orange.system.common.biz.dict.vo.data.param.DictDataPageParam;
-import cn.hengzq.orange.system.common.biz.dict.vo.data.param.UpdateDictDataParam;
-import cn.hengzq.orange.system.common.biz.dict.vo.type.param.AddDictTypeParam;
-import cn.hengzq.orange.system.common.biz.dict.vo.type.param.DictTypeListParam;
+import cn.hengzq.orange.system.common.biz.dict.dto.data.DictDataVO;
+import cn.hengzq.orange.system.common.biz.dict.dto.data.param.DictDataCreateRequest;
+import cn.hengzq.orange.system.common.biz.dict.dto.data.param.DictDataSearchReqeust;
+import cn.hengzq.orange.system.common.biz.dict.dto.data.param.DictDataPageRequest;
+import cn.hengzq.orange.system.common.biz.dict.dto.data.param.DictDataUpdateRequest;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * @author hengzq
  */
 public interface DictDataService {
 
-    String add(AddDictDataParam param);
+    String create(DictDataCreateRequest param);
 
-    Boolean removeById(String id);
+    Boolean deleteById(String id);
 
-    PageDTO<DictDataVO> page(DictDataPageParam param);
+    Boolean updateById(String id, DictDataUpdateRequest param);
 
-    DictDataVO getById(String id);
+    Optional<DictDataVO> getById(String id);
 
-    List<DictDataVO> list(DictDataListParam param);
+    Map<String, List<DictDataVO>> getDictDataMapByTypes(List<String> dictTypeList);
 
-    Map<String,List<DictDataVO>> getDictDataMapByTypes(List<String> dictTypeList);
+    PageDTO<DictDataVO> page(DictDataPageRequest param);
 
-    Boolean updateById(String id, UpdateDictDataParam param);
+    List<DictDataVO> search(DictDataSearchReqeust param);
+
+    List<DictDataVO> searchByDictType(String dictType);
 }
